@@ -1,7 +1,8 @@
-package com.arudo.blown
+package com.arudo.blown.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.arudo.blown.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

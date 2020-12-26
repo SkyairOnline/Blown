@@ -38,7 +38,7 @@ data class DetailGamesResponse(
     val parentsCount: Int,
 
     @field:SerializedName("platforms")
-    val platforms: List<PlatformsResponse>,
+    val platforms: List<PlatformResponse>,
 
     @field:SerializedName("metacritic_platforms")
     val metacriticPlatforms: List<GamePlatformMetacriticResponse>,
@@ -113,7 +113,7 @@ data class DetailGamesResponse(
     val screenshotsCount: Int,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    val name: String,
 
     @field:SerializedName("reddit_description")
     val redditDescription: String,

@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Platform(
+data class PlatformResponse(
 
-    @field:SerializedName("name")
-    val name: String,
+    @field:SerializedName("requirements")
+    val requirements: RequirementsResponse? = null,
 
-    @field:SerializedName("id")
-    val id: Int,
+    @field:SerializedName("released_at")
+    val releasedAt: String? = null,
 
-    @field:SerializedName("slug")
-    val slug: String
+    @field:SerializedName("platform")
+    val platform: DetailPlatformResponse
 ) : Parcelable
