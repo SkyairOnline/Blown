@@ -5,6 +5,7 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "gamesEntity")
@@ -18,7 +19,7 @@ data class GamesEntity(
     val suggestionsCount: Int,
 
     @NonNull
-    val rating: Number,
+    val rating: Int,
 
     @NonNull
     val metacritic: Int,
@@ -27,6 +28,7 @@ data class GamesEntity(
     val playtime: Int,
 
     @NonNull
+    @Expose
     val platforms: List<PlatformEntity>,
 
     @NonNull
@@ -34,9 +36,6 @@ data class GamesEntity(
 
     @NonNull
     val tba: Boolean,
-
-    @Nullable
-    val esrbRating: EsrbRatingEntity,
 
     @NonNull
     val ratingTop: Int,
@@ -76,12 +75,10 @@ data class GamesEntity(
     val metacriticUrl: String,
 
     @Nullable
-    val alternativeNames: List<String>,
-
-    @Nullable
     val parentsCount: Int,
 
     @Nullable
+    @Expose
     val metacriticPlatforms: List<GamePlatformMetacriticEntity>,
 
     @Nullable
@@ -128,5 +125,4 @@ data class GamesEntity(
 
     @Nullable
     val redditLogo: String,
-
-    ) : Parcelable
+) : Parcelable

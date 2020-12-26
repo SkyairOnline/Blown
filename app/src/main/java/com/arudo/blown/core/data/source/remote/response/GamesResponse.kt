@@ -31,9 +31,6 @@ data class GamesResponse(
     @field:SerializedName("tba")
     val tba: Boolean,
 
-    @field:SerializedName("esrb_rating")
-    val esrbRating: EsrbRatingResponse? = null,
-
     @field:SerializedName("rating_top")
     val ratingTop: Int,
 

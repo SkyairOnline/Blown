@@ -13,7 +13,6 @@ data class Games(
     val platforms: List<Platform>,
     val backgroundImage: String,
     val tba: Boolean,
-    val esrbRating: EsrbRating? = null,
     val ratingTop: Int,
     val reviewsTextCount: String,
     val name: String,

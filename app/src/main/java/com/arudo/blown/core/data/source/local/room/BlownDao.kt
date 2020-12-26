@@ -1,6 +1,7 @@
 package com.arudo.blown.core.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.arudo.blown.core.data.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.data.source.local.entity.GamesEntity
@@ -19,8 +20,8 @@ interface BlownDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateDetailGames(games: GamesEntity)
 
-    @Query("SELECT * From gamesEntity a join favoriteGamesEntity b on a.id = b.id order by createdDate desc")
-    fun getListFavorites(games: List<GamesEntity>)
+    @Query("SELECT * From gamesEntity a join favoriteGamesEntity b on a.id = b.id")
+    fun getListGamesFavorites(): DataSource.Factory<Int, GamesEntity>
 
     @Query("SELECT * FROM favoriteGamesEntity where id = :id")
     fun getGamesFavorite(id: Int): LiveData<FavoriteGamesEntity>

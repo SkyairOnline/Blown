@@ -106,9 +106,6 @@ data class DetailGamesResponse(
     @field:SerializedName("tba")
     val tba: Boolean,
 
-    @field:SerializedName("esrb_rating")
-    val esrbRating: EsrbRatingResponse? = null,
-
     @field:SerializedName("screenshots_count")
     val screenshotsCount: Int,
 
