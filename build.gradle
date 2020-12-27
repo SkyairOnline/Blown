@@ -38,4 +38,5 @@ ext{
     room_version = '2.2.6'
     squareup_okhttp3_version = '4.9.0'
     paging_version = '2.1.2'
+    lifecycle_version = '2.2.0'
 }

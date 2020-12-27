@@ -1,6 +1,6 @@
 package com.arudo.blown.core.data.source.remote.network
 
-import com.arudo.blown.core.data.source.remote.response.GamesResponse
+import com.arudo.blown.core.data.source.remote.response.DetailGamesResponse
 import com.arudo.blown.core.data.source.remote.response.ListGamesResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,8 +14,8 @@ interface ApiService {
     ): Response<ListGamesResponse>
 
     @GET("games/{id}")
-    suspend fun getMovieData(
+    suspend fun getDetailGames(
         @Path("id") id: Int,
         @Query("key") key: String
-    ): Response<GamesResponse>
+    ): Response<DetailGamesResponse>
 }

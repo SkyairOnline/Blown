@@ -1,11 +1,19 @@
 package com.arudo.blown.core.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.arudo.blown.core.data.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.data.source.local.entity.GamesEntity
 import com.arudo.blown.core.data.source.local.room.BlownDao
 
 class LocalDataSource(private val blownDao: BlownDao) {
+    companion object {
+        private var localDataSource: LocalDataSource? = null
+        fun getInstance(blownDao: BlownDao): LocalDataSource {
+            return localDataSource ?: LocalDataSource(blownDao)
+        }
+    }
+
     fun getGames(): LiveData<List<GamesEntity>> = blownDao.getGames()
 
     fun insertGames(games: List<GamesEntity>) = blownDao.insertGames(games)
@@ -14,7 +22,8 @@ class LocalDataSource(private val blownDao: BlownDao) {
 
     fun updateDetailGames(games: GamesEntity) = blownDao.updateDetailGames(games)
 
-    fun getListGamesFavorites() = blownDao.getListGamesFavorites()
+    fun getListGamesFavorites(): DataSource.Factory<Int, GamesEntity> =
+        blownDao.getListGamesFavorites()
 
     fun getGamesFavorite(id: Int): LiveData<FavoriteGamesEntity> = blownDao.getGamesFavorite(id)
 

@@ -5,14 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.arudo.blown.core.data.source.local.entity.DetailPlatformEntity
 import com.arudo.blown.core.data.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.data.source.local.entity.GamesEntity
 import com.arudo.blown.core.utils.Converter
 
 @Database(
     entities = [
-        DetailPlatformEntity::class,
         GamesEntity::class,
         FavoriteGamesEntity::class
     ],
