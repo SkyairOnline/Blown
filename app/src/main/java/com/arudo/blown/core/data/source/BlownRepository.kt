@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import com.arudo.blown.core.data.source.local.LocalDataSource
 import com.arudo.blown.core.data.source.remote.RemoteDataSource
 import com.arudo.blown.core.domain.model.Games
+import com.arudo.blown.core.domain.repository.IBlownRepository
 import com.arudo.blown.core.utils.DataMapper
 import com.arudo.blown.core.utils.NetworkBoundResource
 import com.arudo.blown.core.utils.vo.Resource
@@ -14,7 +15,7 @@ class BlownRepository(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val coroutineDispatcher: CoroutineDispatcher
-) {
+) : IBlownRepository {
     companion object {
         @Volatile
         private var blownRepository: BlownRepository? = null
@@ -32,7 +33,7 @@ class BlownRepository(
         }
     }
 
-    fun getGames(): LiveData<Resource<List<Games>>> {
+    override fun getGames(): LiveData<Resource<List<Games>>> {
         return NetworkBoundResource(
             {
                 Transformations.map(localDataSource.getGames()) {
