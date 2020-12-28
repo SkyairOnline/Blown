@@ -13,6 +13,8 @@
         android:theme="@style/Theme.Blown">
         <activity
             android:name=".core.ui.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Blown.NoActionBar"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

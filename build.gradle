@@ -39,4 +39,5 @@ ext{
     squareup_okhttp3_version = '4.9.0'
     paging_version = '2.1.2'
     lifecycle_version = '2.2.0'
+    navigation_version = '2.3.2'
 }
