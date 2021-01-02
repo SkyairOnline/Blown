@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.arudo.blown.core.di.Injection
 import com.arudo.blown.core.domain.usecase.IBlownUseCase
+import com.arudo.blown.core.ui.ui.home.HomeViewModel
 
-class ViewModelFactory private constructor(private val blownUseCase: IBlownUseCase) :
+class ViewModelFactory private constructor(private val iBlownUseCase: IBlownUseCase) :
     ViewModelProvider.NewInstanceFactory() {
     companion object {
         @Volatile
@@ -21,6 +22,11 @@ class ViewModelFactory private constructor(private val blownUseCase: IBlownUseCa
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return super.create(modelClass)
+        return when {
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(iBlownUseCase) as T
+            }
+            else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
+        }
     }
 }

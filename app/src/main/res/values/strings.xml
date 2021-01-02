@@ -8,4 +8,5 @@
     <string name="release_date">Release Date : </string>
     <string name="description_game">Description Game</string>
     <string name="image_background_game">Image Background Game</string>
+    <string name="there_is_an_error_here">There is an error here</string>
 </resources>

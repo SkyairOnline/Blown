@@ -1,13 +1,8 @@
 package com.arudo.blown.core.ui.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.arudo.blown.core.domain.usecase.IBlownUseCase
 
-class HomeViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+class HomeViewModel(iBlownUseCase: IBlownUseCase) : ViewModel() {
+   val games = iBlownUseCase.getGames()
 }
