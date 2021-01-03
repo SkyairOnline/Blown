@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
                             statusLayoutVisibility("Success")
                             homeAdapter.setData(it.data)
                         } else {
-                            statusLayoutVisibility("Error")
+                            statusLayoutVisibility("Loading")
                         }
                     }
                     Status.ERROR -> {
@@ -55,12 +55,16 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.notificationError.visibility = View.GONE
         fragmentHomeBinding.rvHorizontalGame.visibility = View.GONE
 
-        if (status == "Success") {
-            fragmentHomeBinding.rvHorizontalGame.visibility = View.VISIBLE
-        } else if (status == "Error") {
-            fragmentHomeBinding.notificationError.visibility = View.VISIBLE
-        } else if (status == "Loading") {
-            fragmentHomeBinding.progressBar.visibility = View.VISIBLE
+        when (status) {
+            "Success" -> {
+                fragmentHomeBinding.rvHorizontalGame.visibility = View.VISIBLE
+            }
+            "Error" -> {
+                fragmentHomeBinding.notificationError.visibility = View.VISIBLE
+            }
+            "Loading" -> {
+                fragmentHomeBinding.progressBar.visibility = View.VISIBLE
+            }
         }
     }
 

@@ -8,7 +8,7 @@ data class GamesResponse(
     val suggestionsCount: Int,
 
     @field:SerializedName("rating")
-    val rating: Int,
+    val rating: Double,
 
     @field:SerializedName("metacritic")
     val metacritic: Int,

@@ -14,7 +14,7 @@ import com.arudo.blown.core.utils.Converter
         GamesEntity::class,
         FavoriteGamesEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converter::class)

@@ -12,7 +12,7 @@ data class GamesEntity(
     val suggestionsCount: Int,
 
     @NonNull
-    val rating: Int,
+    val rating: Double,
 
     @NonNull
     val metacritic: Int,

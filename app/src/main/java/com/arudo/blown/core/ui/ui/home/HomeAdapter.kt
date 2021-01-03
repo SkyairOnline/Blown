@@ -33,7 +33,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
                     itemGameBinding.backgroundImage
                 )
                 itemGameBinding.contentItemGame.txtGameTitle.text = name
-                itemGameBinding.contentItemGame.txtDescription.text = description
                 itemGameBinding.contentItemGame.txtReleaseDate.text = released
             }
         }
