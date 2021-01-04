@@ -14,9 +14,9 @@ object Injection {
     private fun provideRepository(context: Context): BlownRepository {
         val blownDatabase = BlownDatabase.getInstance(context)
         val localDataSource = LocalDataSource.getInstance(blownDatabase.blownDao())
-        val remoteDataSource = RemoteDataSource.getInstance(ApiConfig.getApiService())
         val dispatcher = Dispatchers.IO
-        return BlownRepository.getInstance(localDataSource, remoteDataSource, dispatcher)
+        val remoteDataSource = RemoteDataSource.getInstance(ApiConfig.getApiService(), dispatcher)
+        return BlownRepository.getInstance(localDataSource, remoteDataSource)
     }
 
     fun provideUseCase(context: Context): IBlownUseCase {

@@ -29,19 +29,20 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         with(holder) {
             with(gamesData[position]) {
                 val contextHolder = holder.itemView.context
+                val contentItemGameBinding = itemGameBinding.contentItemGame
                 BackgroundImageContainer(
                     holder.itemView.context,
                     backgroundImage,
                     itemGameBinding.backgroundImage
                 )
-                itemGameBinding.contentItemGame.txtGameTitle.text = name
-                itemGameBinding.contentItemGame.txtReleaseDate.text = released
-                itemGameBinding.contentItemGame.txtPlaytime.text = contextHolder.getString(
+                contentItemGameBinding.txtGameTitle.text = name
+                contentItemGameBinding.txtReleaseDate.text = released
+                contentItemGameBinding.txtPlaytime.text = contextHolder.getString(
                     R.string.playtimeNumber, playtime
                 )
-                itemGameBinding.contentItemGame.txtSuggested.text =
+                contentItemGameBinding.txtSuggested.text =
                     contextHolder.getString(R.string.suggested_byNumber, suggestionsCount)
-                itemGameBinding.contentItemGame.txtRating.text =
+                contentItemGameBinding.txtRating.text =
                     contextHolder.getString(R.string.ratingNumber, rating)
             }
         }

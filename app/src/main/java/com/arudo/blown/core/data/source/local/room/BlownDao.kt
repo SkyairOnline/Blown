@@ -1,21 +1,21 @@
 package com.arudo.blown.core.data.source.local.room
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import com.arudo.blown.core.data.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.data.source.local.entity.GamesEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BlownDao {
     @Query("SELECT * FROM gamesEntity")
-    fun getGames(): LiveData<List<GamesEntity>>
+    fun getGames(): Flow<List<GamesEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGames(games: List<GamesEntity>)
+    suspend fun insertGames(games: List<GamesEntity>)
 
     @Query("SELECT * FROM gamesEntity where id = :id")
-    fun getDetailGames(id: Int): LiveData<GamesEntity>
+    fun getDetailGames(id: Int): Flow<GamesEntity>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateDetailGames(games: GamesEntity)
@@ -24,7 +24,7 @@ interface BlownDao {
     fun getListGamesFavorites(): DataSource.Factory<Int, GamesEntity>
 
     @Query("SELECT * FROM favoriteGamesEntity where id = :id")
-    fun getGamesFavorite(id: Int): LiveData<FavoriteGamesEntity>
+    fun getGamesFavorite(id: Int): Flow<FavoriteGamesEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteGame(favoriteGames: FavoriteGamesEntity)
