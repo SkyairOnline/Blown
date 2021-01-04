@@ -9,30 +9,101 @@
         android:id="@+id/txtGameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
         android:text="@string/game_title"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/releaseDate"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/calendarImage"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/release_date"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/release_date"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@id/txtReleaseDate"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtGameTitle" />
+        app:layout_constraintRight_toRightOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/txtGameTitle"
+        app:srcCompat="@drawable/ic_date_range" />
 
     <TextView
         android:id="@+id/txtReleaseDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/release_date"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/calendarImage" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/release_date"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <ImageView
+        android:id="@+id/timeImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/playtime"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@id/txtPlaytime"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/txtGameTitle"
+        app:srcCompat="@drawable/ic_access_time" />
+
+    <TextView
+        android:id="@+id/txtPlaytime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/playtime"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/releaseDate"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/timeImage" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <TextView
+        android:id="@+id/txtRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:text="@string/rating"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/txtSuggested"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline1"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtGameTitle" />
+
+    <TextView
+        android:id="@+id/txtSuggested"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/suggested_by"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/guideline1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtRating" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

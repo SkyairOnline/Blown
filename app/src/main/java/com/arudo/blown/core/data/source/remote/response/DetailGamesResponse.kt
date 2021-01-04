@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class DetailGamesResponse(
 
-    @field:SerializedName("metacritic")
-    val metacritic: Int,
+    @field:SerializedName("reviews_text_count")
+    val reviewsTextCount: Int,
 
     @field:SerializedName("rating")
     val rating: Int,

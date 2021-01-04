@@ -15,7 +15,7 @@ data class GamesEntity(
     val rating: Double,
 
     @NonNull
-    val metacritic: Int,
+    val reviewsTextCount: Int,
 
     @NonNull
     val playtime: Int,

@@ -5,8 +5,14 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="game_title">Game Title</string>
-    <string name="release_date">Release Date : </string>
+    <string name="release_date">Release Date</string>
     <string name="description_game">Description Game</string>
     <string name="image_background_game">Image Background Game</string>
     <string name="there_is_an_error_here">There is an error here</string>
+    <string name="rating">Rating</string>
+    <string name="ratingNumber">%1$.1f \u2605</string>
+    <string name="suggested_by">Suggested</string>
+    <string name="suggested_byNumber">%1$d \u2764</string>
+    <string name="playtime">Playtime</string>
+    <string name="playtimeNumber">%1$d hours</string>
 </resources>
