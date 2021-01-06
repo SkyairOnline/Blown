@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.arudo.blown.R
-import com.arudo.blown.core.utils.vo.Status
+import com.arudo.blown.core.data.source.local.Resource
+import com.arudo.blown.core.utils.Status
 import com.arudo.blown.core.viewmodel.ViewModelFactory
 import com.arudo.blown.databinding.FragmentHomeBinding
 
@@ -30,39 +31,35 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.rvHorizontalGame.adapter = homeAdapter
         homeViewModel.games.observe(viewLifecycleOwner, {
             if (it != null) {
-                when (it.status) {
-                    Status.LOADING -> {
-                        statusLayoutVisibility("Loading")
+                when (it) {
+                    is Resource.Loading -> {
+                        statusLayoutVisibility(Status.Loading)
                     }
-                    Status.SUCCESS -> {
-                        if (it.data?.isNotEmpty() == true) {
-                            statusLayoutVisibility("Success")
-                            homeAdapter.setData(it.data)
-                        } else {
-                            statusLayoutVisibility("Loading")
-                        }
+                    is Resource.Success -> {
+                        statusLayoutVisibility(Status.Success)
+                        homeAdapter.setData(it.data!!)
                     }
-                    Status.ERROR -> {
-                        statusLayoutVisibility("Error")
+                    is Resource.Error -> {
+                        statusLayoutVisibility(Status.Error)
                     }
                 }
             }
         })
     }
 
-    private fun statusLayoutVisibility(status: String) {
+    private fun statusLayoutVisibility(status: Status) {
         fragmentHomeBinding.progressBar.visibility = View.GONE
         fragmentHomeBinding.notificationError.visibility = View.GONE
         fragmentHomeBinding.rvHorizontalGame.visibility = View.GONE
 
         when (status) {
-            "Success" -> {
+            Status.Success -> {
                 fragmentHomeBinding.rvHorizontalGame.visibility = View.VISIBLE
             }
-            "Error" -> {
+            Status.Error -> {
                 fragmentHomeBinding.notificationError.visibility = View.VISIBLE
             }
-            "Loading" -> {
+            Status.Loading -> {
                 fragmentHomeBinding.progressBar.visibility = View.VISIBLE
             }
         }

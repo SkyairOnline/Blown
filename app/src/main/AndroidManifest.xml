@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Blown">
+        <activity android:name=".core.ui.DetailActivity"></activity>
         <activity
             android:name=".core.ui.MainActivity"
             android:configChanges="orientation|screenSize"

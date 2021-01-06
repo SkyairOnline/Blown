@@ -1,6 +1,6 @@
 package com.arudo.blown.core.data.source.remote
 
-import com.arudo.blown.core.utils.vo.Resource
+import com.arudo.blown.core.data.source.remote.network.ApiResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,19 +11,18 @@ abstract class BaseDataSource {
     suspend fun <T> getResult(
         call: suspend () -> Response<T>,
         dispatcher: CoroutineDispatcher
-    ): Flow<Resource<out T>> {
+    ): Flow<ApiResponse<T>> {
         return flow {
             try {
                 val responseCall = call()
                 if (responseCall.isSuccessful) {
                     val responseBody = responseCall.body()
-                    if (responseBody != null) {
-                        emit(Resource.success(responseBody))
-                    }
+                    emit(ApiResponse.Success(responseBody!!))
+                } else {
+                    emit(ApiResponse.Error("${responseCall.code()} ${responseCall.message()}"))
                 }
-                emit(Resource.error("${responseCall.code()} ${responseCall.message()}", null))
             } catch (e: Exception) {
-                emit(Resource.error(e.message ?: e.toString(), null))
+                emit(ApiResponse.Error(e.toString()))
             }
         }.flowOn(dispatcher)
     }

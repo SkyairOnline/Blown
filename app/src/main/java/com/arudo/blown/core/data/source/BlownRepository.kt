@@ -1,12 +1,12 @@
 package com.arudo.blown.core.data.source
 
 import com.arudo.blown.core.data.source.local.LocalDataSource
+import com.arudo.blown.core.data.source.local.Resource
 import com.arudo.blown.core.data.source.remote.RemoteDataSource
 import com.arudo.blown.core.domain.model.Games
 import com.arudo.blown.core.domain.repository.IBlownRepository
 import com.arudo.blown.core.utils.DataMapper
 import com.arudo.blown.core.utils.NetworkBoundResource
-import com.arudo.blown.core.utils.vo.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

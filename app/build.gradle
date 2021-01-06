@@ -16,7 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        missingDimensionStrategy 'react-native-camera', 'general'
         buildConfigField("String", "KEY", "\"a67f34db72de4bcd8b2512c2fb9ca479\"")
     }
 
