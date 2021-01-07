@@ -1,4 +1,4 @@
-package com.arudo.blown.core.ui
+package com.arudo.blown.core.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.arudo.blown.core.ui.ui.dashboard
+package com.arudo.blown.core.ui.main.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

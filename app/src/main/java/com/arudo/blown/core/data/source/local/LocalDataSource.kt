@@ -20,7 +20,7 @@ class LocalDataSource(private val blownDao: BlownDao) {
 
     fun getDetailGames(id: Int): Flow<GamesEntity> = blownDao.getDetailGames(id)
 
-    fun updateDetailGames(games: GamesEntity) = blownDao.updateDetailGames(games)
+    suspend fun updateDetailGames(games: GamesEntity) = blownDao.updateDetailGames(games)
 
     fun getListGamesFavorites(): DataSource.Factory<Int, GamesEntity> =
         blownDao.getListGamesFavorites()

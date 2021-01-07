@@ -17,8 +17,8 @@ interface BlownDao {
     @Query("SELECT * FROM gamesEntity where id = :id")
     fun getDetailGames(id: Int): Flow<GamesEntity>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateDetailGames(games: GamesEntity)
+    @Update
+    suspend fun updateDetailGames(games: GamesEntity)
 
     @Query("SELECT * From gamesEntity a join favoriteGamesEntity b on a.id = b.id")
     fun getListGamesFavorites(): DataSource.Factory<Int, GamesEntity>

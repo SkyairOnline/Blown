@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IBlownRepository {
     fun getGames(): Flow<Resource<List<Games>>>
+    fun getDetailGame(gamesId: Int): Flow<Resource<Games>>
 }

@@ -1,10 +1,12 @@
-package com.arudo.blown.core.ui.ui.home
+package com.arudo.blown.core.ui.main.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.R
 import com.arudo.blown.core.domain.model.Games
+import com.arudo.blown.core.ui.detail.DetailActivity
 import com.arudo.blown.core.utils.BackgroundImageContainer
 import com.arudo.blown.databinding.ItemGameBinding
 
@@ -32,6 +34,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
                 val contentItemGameBinding = itemGameBinding.contentItemGame
                 BackgroundImageContainer(
                     holder.itemView.context,
+                    null,
                     backgroundImage,
                     itemGameBinding.backgroundImage
                 )
@@ -44,6 +47,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
                     contextHolder.getString(R.string.suggested_byNumber, suggestionsCount)
                 contentItemGameBinding.txtRating.text =
                     contextHolder.getString(R.string.ratingNumber, rating)
+                holder.itemView.setOnClickListener {
+                    val intent = Intent(contextHolder, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_DETAIL, id)
+                    contextHolder.startActivity(intent)
+                }
             }
         }
     }

@@ -14,8 +14,8 @@ data class GamesEntity(
     @NonNull
     val rating: Double,
 
-    @NonNull
-    val reviewsTextCount: Int,
+    @Nullable
+    val reviewsTextCount: Int?,
 
     @NonNull
     val playtime: Int,
@@ -23,8 +23,8 @@ data class GamesEntity(
     @NonNull
     val backgroundImage: String,
 
-    @NonNull
-    val ratingTop: Int,
+    @Nullable
+    val ratingTop: Int?,
 
     @NonNull
     val name: String,

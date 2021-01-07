@@ -1,4 +1,4 @@
-package com.arudo.blown.core.ui.ui.home
+package com.arudo.blown.core.ui.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

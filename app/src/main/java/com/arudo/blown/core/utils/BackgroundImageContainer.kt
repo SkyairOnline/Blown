@@ -1,5 +1,6 @@
 package com.arudo.blown.core.utils
 
+import android.app.Activity
 import android.content.Context
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -9,15 +10,35 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
-fun BackgroundImageContainer(context: Context, imagePath: String, view: ImageView) {
-    val circularProgressDrawable = CircularProgressDrawable(context)
-    circularProgressDrawable.centerRadius = 10f
-    circularProgressDrawable.strokeWidth = 5f
-    circularProgressDrawable.start()
+fun BackgroundImageContainer(
+    context: Context? = null,
+    activity: Activity? = null,
+    imagePath: String,
+    view: ImageView
+) {
 
-    Glide.with(context).load(imagePath).apply(
-        RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
-            .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
-            .error(R.drawable.ic_broken_image)
-    ).into(view)
+    lateinit var circularProgressDrawable: CircularProgressDrawable
+
+    if (context != null) {
+        circularProgressDrawable = CircularProgressDrawable(context)
+        circularProgressDrawable.centerRadius = 10f
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.start()
+        Glide.with(context).load(imagePath).apply(
+            RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
+                .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
+                .error(R.drawable.ic_broken_image)
+        ).into(view)
+    } else if (activity != null) {
+        circularProgressDrawable = CircularProgressDrawable(activity)
+        circularProgressDrawable.centerRadius = 10f
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.start()
+        Glide.with(activity).load(imagePath).apply(
+            RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
+                .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
+                .error(R.drawable.ic_broken_image)
+        ).into(view)
+    }
+
 }

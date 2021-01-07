@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 class BlownUseCase(private val blownRepository: BlownRepository) : IBlownUseCase {
     override fun getGames(): Flow<Resource<List<Games>>> = blownRepository.getGames()
+    override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> =
+        blownRepository.getDetailGame(gamesId)
 }

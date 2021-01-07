@@ -1,4 +1,4 @@
-package com.arudo.blown.core.ui.ui.home
+package com.arudo.blown.core.ui.main.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,8 +36,8 @@ class HomeFragment : Fragment() {
                         statusLayoutVisibility(Status.Loading)
                     }
                     is Resource.Success -> {
-                        statusLayoutVisibility(Status.Success)
                         homeAdapter.setData(it.data!!)
+                        statusLayoutVisibility(Status.Success)
                     }
                     is Resource.Error -> {
                         statusLayoutVisibility(Status.Error)

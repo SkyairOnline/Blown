@@ -1,4 +1,4 @@
-package com.arudo.blown.core.ui.ui.dashboard
+package com.arudo.blown.core.ui.main.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

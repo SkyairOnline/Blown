@@ -8,9 +8,9 @@ data class DetailGamesResponse(
     val reviewsTextCount: Int,
 
     @field:SerializedName("rating")
-    val rating: Int,
+    val rating: Double,
 
-    @field:SerializedName("description")
+    @field:SerializedName("description_raw")
     val description: String,
 
     @field:SerializedName("playtime")

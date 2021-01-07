@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.arudo.blown.core.di.Injection
 import com.arudo.blown.core.domain.usecase.IBlownUseCase
-import com.arudo.blown.core.ui.ui.home.HomeViewModel
+import com.arudo.blown.core.ui.detail.DetailViewModel
+import com.arudo.blown.core.ui.main.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val iBlownUseCase: IBlownUseCase) :
     ViewModelProvider.NewInstanceFactory() {
@@ -25,6 +26,9 @@ class ViewModelFactory private constructor(private val iBlownUseCase: IBlownUseC
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(iBlownUseCase) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(iBlownUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

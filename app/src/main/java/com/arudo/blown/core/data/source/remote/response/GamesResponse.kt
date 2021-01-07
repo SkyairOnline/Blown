@@ -10,17 +10,11 @@ data class GamesResponse(
     @field:SerializedName("rating")
     val rating: Double,
 
-    @field:SerializedName("reviews_text_count")
-    val reviewsTextCount: Int,
-
     @field:SerializedName("playtime")
     val playtime: Int,
 
     @field:SerializedName("background_image")
     val backgroundImage: String,
-
-    @field:SerializedName("rating_top")
-    val ratingTop: Int,
 
     @field:SerializedName("name")
     val name: String,

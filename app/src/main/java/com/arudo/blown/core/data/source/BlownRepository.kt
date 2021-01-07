@@ -43,4 +43,19 @@ class BlownRepository(
             }
         )
     }
+
+    override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> {
+        return NetworkBoundResource(
+            {
+                localDataSource.getDetailGames(gamesId).map {
+                    DataMapper.mapDetailGamesEntitiesToDomain(it)
+                }
+            },
+            { remoteDataSource.getDetailGames(gamesId) },
+            {
+                val gamesList = DataMapper.mapDetailGamesResponseToEntities(it)
+                localDataSource.updateDetailGames(gamesList)
+            }
+        )
+    }
 }

@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefeshlayout_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$jetbrains_kotlinx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$jetbrains_kotlinx_version"
+    implementation "com.github.smarteist:autoimageslider:$github_smarteist"
     kapt "androidx.room:room-compiler:$room_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_version"

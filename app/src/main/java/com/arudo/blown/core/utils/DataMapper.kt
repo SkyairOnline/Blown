@@ -1,6 +1,7 @@
 package com.arudo.blown.core.utils
 
 import com.arudo.blown.core.data.source.local.entity.GamesEntity
+import com.arudo.blown.core.data.source.remote.response.DetailGamesResponse
 import com.arudo.blown.core.data.source.remote.response.GamesResponse
 import com.arudo.blown.core.domain.model.Games
 
@@ -14,10 +15,10 @@ object DataMapper {
             backgroundImage = it.backgroundImage,
             backgroundImageAdditional = null,
             description = null,
-            reviewsTextCount = it.reviewsTextCount,
+            reviewsTextCount = null,
             name = it.name,
             playtime = it.playtime,
-            ratingTop = it.ratingTop,
+            ratingTop = null,
             released = it.released,
             website = null
         )
@@ -39,4 +40,36 @@ object DataMapper {
             website = it.website
         )
     }
+
+    fun mapDetailGamesResponseToEntities(input: DetailGamesResponse): GamesEntity = GamesEntity(
+        suggestionsCount = input.suggestionsCount,
+        rating = input.rating,
+        id = input.id,
+        backgroundImage = input.backgroundImage,
+        backgroundImageAdditional = input.backgroundImageAdditional,
+        description = input.description,
+        reviewsTextCount = input.reviewsTextCount,
+        name = input.name,
+        playtime = input.playtime,
+        ratingTop = input.ratingTop,
+        released = input.released,
+        website = input.website
+    )
+
+    fun mapDetailGamesEntitiesToDomain(input: GamesEntity): Games = Games(
+        suggestionsCount = input.suggestionsCount,
+        rating = input.rating,
+        id = input.id,
+        backgroundImage = input.backgroundImage,
+        backgroundImageAdditional = input.backgroundImageAdditional,
+        description = input.description,
+        reviewsTextCount = input.reviewsTextCount,
+        name = input.name,
+        playtime = input.playtime,
+        ratingTop = input.ratingTop,
+        released = input.released,
+        website = input.website
+    )
+
+
 }
