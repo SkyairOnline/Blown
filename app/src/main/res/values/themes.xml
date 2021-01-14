@@ -26,6 +26,7 @@
     </style>
 
     <style name="button" parent="Theme.Blown">
-        <item name="android:background">@drawable/button_background</item>
+        <item name="android:theme">@drawable/button_background</item>
+        <item name="android:backgroundTint">@color/black_500</item>
     </style>
 </resources>
