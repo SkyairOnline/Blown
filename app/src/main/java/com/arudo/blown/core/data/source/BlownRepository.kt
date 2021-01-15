@@ -14,20 +14,6 @@ class BlownRepository(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : IBlownRepository {
-    companion object {
-        @Volatile
-        private var blownRepository: BlownRepository? = null
-
-        fun getInstance(
-            localDataSource: LocalDataSource,
-            remoteDataSource: RemoteDataSource
-        ): BlownRepository = blownRepository ?: synchronized(this) {
-            blownRepository ?: BlownRepository(
-                localDataSource,
-                remoteDataSource
-            )
-        }
-    }
 
     override fun getGames(): Flow<Resource<List<Games>>> {
         return NetworkBoundResource(

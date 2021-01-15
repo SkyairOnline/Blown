@@ -3,17 +3,16 @@ package com.arudo.blown.core.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.arudo.blown.R
 import com.arudo.blown.core.data.source.local.Resource
 import com.arudo.blown.core.utils.BackgroundImageContainer
 import com.arudo.blown.core.utils.Status
-import com.arudo.blown.core.viewmodel.ViewModelFactory
 import com.arudo.blown.databinding.ActivityDetailBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var detailViewModel: DetailViewModel
+    private val detailViewModel: DetailViewModel by viewModel()
     private lateinit var activityDetailBinding: ActivityDetailBinding
 
     companion object {
@@ -28,10 +27,6 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding.progressBarDetail.visibility = View.VISIBLE
         activityDetailBinding.notificationErrorDetail.visibility = View.GONE
         activityDetailBinding.fragmentDetail.visibility = View.GONE
-        detailViewModel = ViewModelProvider(
-            this,
-            ViewModelFactory.getInstance(this)
-        ).get(DetailViewModel::class.java)
         val gamesId = intent.extras?.getInt(EXTRA_DETAIL) ?: return
         detailViewModel.setGameDetailId(gamesId)
         detailViewModel.games.observe(this, {

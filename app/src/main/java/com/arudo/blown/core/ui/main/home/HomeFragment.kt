@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.arudo.blown.R
 import com.arudo.blown.core.data.source.local.Resource
 import com.arudo.blown.core.utils.Status
-import com.arudo.blown.core.viewmodel.ViewModelFactory
 import com.arudo.blown.databinding.FragmentHomeBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModel()
     private lateinit var fragmentHomeBinding: FragmentHomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,10 +22,6 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.progressBar.visibility = View.VISIBLE
         fragmentHomeBinding.notificationError.visibility = View.GONE
         fragmentHomeBinding.rvHorizontalGame.visibility = View.GONE
-        homeViewModel =
-            ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity())).get(
-                HomeViewModel::class.java
-            )
         val homeAdapter = HomeAdapter()
         fragmentHomeBinding.rvHorizontalGame.adapter = homeAdapter
         homeViewModel.games.observe(viewLifecycleOwner, {

@@ -7,12 +7,6 @@ import com.arudo.blown.core.data.source.local.room.BlownDao
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val blownDao: BlownDao) {
-    companion object {
-        private var localDataSource: LocalDataSource? = null
-        fun getInstance(blownDao: BlownDao): LocalDataSource {
-            return localDataSource ?: LocalDataSource(blownDao)
-        }
-    }
 
     fun getGames(): Flow<List<GamesEntity>> = blownDao.getGames()
 
