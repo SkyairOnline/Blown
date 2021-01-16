@@ -2,7 +2,7 @@
     <string name="app_name">Blown</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_search">Search</string>
     <string name="title_activity_detail">Detail Games</string>
     <string name="game_title">Game Title</string>
     <string name="release_date">Release Date</string>
