@@ -8,10 +8,16 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory<IBlownUseCase> { BlownUseCase(get()) }
+    factory<IBlownUseCase> {
+        BlownUseCase(get())
+    }
 }
 
 val viewModelModule = module {
-    viewModel { HomeViewModel(get()) }
-    viewModel { DetailViewModel(get()) }
+    viewModel {
+        HomeViewModel(get())
+    }
+    viewModel {
+        DetailViewModel(get())
+    }
 }

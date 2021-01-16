@@ -17,7 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
-    factory { get<BlownDatabase>().blownDao() }
+    factory {
+        get<BlownDatabase>().blownDao()
+    }
     single {
         Room
             .databaseBuilder(
@@ -30,7 +32,7 @@ val databaseModule = module {
     }
 }
 
-val networkModule = module {
+val apiModule = module {
     single {
         OkHttpClient
             .Builder()
@@ -54,8 +56,16 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single { LocalDataSource(get()) }
-    factory { Dispatchers.IO }
-    single { RemoteDataSource(get(), get()) }
-    single<IBlownRepository> { BlownRepository(get(), get()) }
+    single {
+        LocalDataSource(get())
+    }
+    factory {
+        Dispatchers.IO
+    }
+    single {
+        RemoteDataSource(get(), get())
+    }
+    single<IBlownRepository> {
+        BlownRepository(get(), get())
+    }
 }
