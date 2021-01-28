@@ -9,4 +9,7 @@ class BlownUseCase(private val iBlownRepository: IBlownRepository) : IBlownUseCa
     override fun getGames(): Flow<Resource<List<Games>>> = iBlownRepository.getGames()
     override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> =
         iBlownRepository.getDetailGame(gamesId)
+
+    override fun getSearchGames(search: String): Flow<Resource<List<Games>>> =
+        iBlownRepository.getSearchGames(search)
 }

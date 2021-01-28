@@ -11,6 +11,9 @@ interface BlownDao {
     @Query("SELECT * FROM gamesEntity")
     fun getGames(): Flow<List<GamesEntity>>
 
+    @Query("SELECT * FROM gamesEntity where name like :search")
+    fun getSearchGames(search: String): Flow<List<GamesEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGames(games: List<GamesEntity>)
 

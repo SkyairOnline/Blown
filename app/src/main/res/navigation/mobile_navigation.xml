@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.arudo.blown.core.ui.main.dashboard.SearchFragment"
+        android:name="com.arudo.blown.core.ui.main.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 

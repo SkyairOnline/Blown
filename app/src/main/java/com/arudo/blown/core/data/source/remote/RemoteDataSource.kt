@@ -15,4 +15,7 @@ class RemoteDataSource(
 
     suspend fun getDetailGames(gamesId: Int) =
         getResult({ apiService.getDetailGames(gamesId, key) }, dispatcher)
+
+    suspend fun getSearchGames(search: String) =
+        getResult({ apiService.getSearchGames(key, search, true) }, dispatcher)
 }

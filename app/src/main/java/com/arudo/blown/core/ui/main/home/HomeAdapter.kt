@@ -33,7 +33,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
                 val contextHolder = holder.itemView.context
                 val contentItemGameBinding = itemGameBinding.contentItemGame
                 BackgroundImageContainer(
-                    holder.itemView.context,
+                    contextHolder,
                     null,
                     backgroundImage,
                     itemGameBinding.backgroundImage

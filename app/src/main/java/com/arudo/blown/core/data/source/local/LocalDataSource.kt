@@ -10,6 +10,9 @@ class LocalDataSource(private val blownDao: BlownDao) {
 
     fun getGames(): Flow<List<GamesEntity>> = blownDao.getGames()
 
+    fun getSearchGames(search: String): Flow<List<GamesEntity>> =
+        blownDao.getSearchGames("$search%")
+
     suspend fun insertGames(games: List<GamesEntity>) = blownDao.insertGames(games)
 
     fun getDetailGames(id: Int): Flow<GamesEntity> = blownDao.getDetailGames(id)

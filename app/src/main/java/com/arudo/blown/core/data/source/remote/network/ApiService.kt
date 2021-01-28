@@ -18,4 +18,11 @@ interface ApiService {
         @Path("id") id: Int,
         @Query("key") key: String
     ): Response<DetailGamesResponse>
+
+    @GET("games")
+    suspend fun getSearchGames(
+        @Query("key") key: String,
+        @Query("search") search: String,
+        @Query("search_precise") searchPrecise: Boolean
+    ): Response<ListGamesResponse>
 }
