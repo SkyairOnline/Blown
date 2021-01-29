@@ -81,7 +81,7 @@ class DetailActivity : AppCompatActivity() {
             buttonFavorite = !buttonFavorite
             statusButtonText(buttonFavorite)
             if (buttonFavorite) {
-                detailViewModel.setGameDetailId(gamesId)
+                detailViewModel.insertFavoriteGames(gamesId)
                 toastMessage(it.context, getString(R.string.added_favorite_toast, gameName))
             } else {
                 detailViewModel.deleteFavoriteGames(gamesId)
