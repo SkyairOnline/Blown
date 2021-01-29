@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.core.domain.model.Games
 import com.arudo.blown.core.ui.detail.DetailActivity
 import com.arudo.blown.core.utils.BackgroundImageContainer
-import com.arudo.blown.databinding.ItemSearchGameBinding
+import com.arudo.blown.databinding.ItemSmallGameBinding
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private val searchGamesData = ArrayList<Games>()
@@ -18,14 +18,14 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class SearchViewHolder(val itemSearchGameBinding: ItemSearchGameBinding) :
+    inner class SearchViewHolder(val itemSearchGameBinding: ItemSmallGameBinding) :
         RecyclerView.ViewHolder(itemSearchGameBinding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): SearchViewHolder = SearchViewHolder(
-        ItemSearchGameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemSmallGameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

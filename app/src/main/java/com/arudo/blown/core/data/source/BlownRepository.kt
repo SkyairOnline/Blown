@@ -1,8 +1,13 @@
 package com.arudo.blown.core.data.source
 
+import androidx.lifecycle.asFlow
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.arudo.blown.core.data.source.local.LocalDataSource
 import com.arudo.blown.core.data.source.local.Resource
+import com.arudo.blown.core.data.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.data.source.remote.RemoteDataSource
+import com.arudo.blown.core.domain.model.FavoriteGames
 import com.arudo.blown.core.domain.model.Games
 import com.arudo.blown.core.domain.repository.IBlownRepository
 import com.arudo.blown.core.utils.DataMapper
@@ -18,12 +23,12 @@ class BlownRepository(
     override fun getGames(): Flow<Resource<List<Games>>> = NetworkBoundResource(
         {
             localDataSource.getGames().map {
-                DataMapper.mapGamesEntitiesToDomain(it)
+                DataMapper.mapListGamesEntitiesToDomain(it)
             }
         },
         { remoteDataSource.getGames() },
         {
-            val gamesList = DataMapper.mapGamesResponseToEntities(it.results)
+            val gamesList = DataMapper.mapListGamesResponseToEntities(it.results)
             localDataSource.insertGames(gamesList)
         }
     )
@@ -31,12 +36,12 @@ class BlownRepository(
     override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> = NetworkBoundResource(
         {
             localDataSource.getDetailGames(gamesId).map {
-                DataMapper.mapDetailGamesEntitiesToDomain(it)
+                DataMapper.mapGamesEntitiesToDomain(it)
             }
         },
         { remoteDataSource.getDetailGames(gamesId) },
         {
-            val gamesList = DataMapper.mapDetailGamesResponseToEntities(it)
+            val gamesList = DataMapper.mapGamesResponseToEntities(it)
             localDataSource.updateDetailGames(gamesList)
         }
     )
@@ -45,13 +50,31 @@ class BlownRepository(
     override fun getSearchGames(search: String): Flow<Resource<List<Games>>> = NetworkBoundResource(
         {
             localDataSource.getSearchGames(search).map {
-                DataMapper.mapGamesEntitiesToDomain(it)
+                DataMapper.mapListGamesEntitiesToDomain(it)
             }
         },
         { remoteDataSource.getSearchGames(search) },
         {
-            val gamesList = DataMapper.mapGamesResponseToEntities(it.results)
+            val gamesList = DataMapper.mapListGamesResponseToEntities(it.results)
             localDataSource.insertGames(gamesList)
         }
     )
+
+    override fun getListGamesFavorites(): Flow<PagedList<Games>> = LivePagedListBuilder(
+        localDataSource.getListGamesFavorites().map { DataMapper.mapGamesEntitiesToDomain(it) },
+        PagedList.Config.Builder().setEnablePlaceholders(false).setInitialLoadSizeHint(20)
+            .setPageSize(20).build()
+    ).build().asFlow()
+
+
+    override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames> =
+        localDataSource.getGamesFavorite(favoriteGamesId).map {
+            DataMapper.mapFavoriteGamesEntitiesToDomain(it)
+        }
+
+    override suspend fun insertFavoriteGame(favoriteGamesId: Int) =
+        localDataSource.insertFavoriteGame(FavoriteGamesEntity(favoriteGamesId))
+
+    override suspend fun deleteFavoriteGame(favoriteGamesId: Int) =
+        localDataSource.deleteFavoriteGame(FavoriteGamesEntity(favoriteGamesId))
 }

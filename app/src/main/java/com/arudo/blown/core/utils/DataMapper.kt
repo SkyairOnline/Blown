@@ -1,13 +1,15 @@
 package com.arudo.blown.core.utils
 
+import com.arudo.blown.core.data.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.data.source.local.entity.GamesEntity
 import com.arudo.blown.core.data.source.remote.response.DetailGamesResponse
 import com.arudo.blown.core.data.source.remote.response.GamesResponse
+import com.arudo.blown.core.domain.model.FavoriteGames
 import com.arudo.blown.core.domain.model.Games
 
 object DataMapper {
 
-    fun mapGamesResponseToEntities(input: List<GamesResponse>): List<GamesEntity> = input.map {
+    fun mapListGamesResponseToEntities(input: List<GamesResponse>): List<GamesEntity> = input.map {
         GamesEntity(
             suggestionsCount = it.suggestionsCount,
             rating = it.rating,
@@ -24,7 +26,7 @@ object DataMapper {
         )
     }
 
-    fun mapGamesEntitiesToDomain(input: List<GamesEntity>): List<Games> = input.map {
+    fun mapListGamesEntitiesToDomain(input: List<GamesEntity>): List<Games> = input.map {
         Games(
             suggestionsCount = it.suggestionsCount,
             rating = it.rating,
@@ -41,7 +43,7 @@ object DataMapper {
         )
     }
 
-    fun mapDetailGamesResponseToEntities(input: DetailGamesResponse): GamesEntity = GamesEntity(
+    fun mapGamesResponseToEntities(input: DetailGamesResponse): GamesEntity = GamesEntity(
         suggestionsCount = input.suggestionsCount,
         rating = input.rating,
         id = input.id,
@@ -56,7 +58,7 @@ object DataMapper {
         website = input.website
     )
 
-    fun mapDetailGamesEntitiesToDomain(input: GamesEntity): Games = Games(
+    fun mapGamesEntitiesToDomain(input: GamesEntity): Games = Games(
         suggestionsCount = input.suggestionsCount,
         rating = input.rating,
         id = input.id,
@@ -71,5 +73,7 @@ object DataMapper {
         website = input.website
     )
 
-
+    fun mapFavoriteGamesEntitiesToDomain(input: FavoriteGamesEntity): FavoriteGames = FavoriteGames(
+        id = input.id
+    )
 }

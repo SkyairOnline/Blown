@@ -1,7 +1,9 @@
 package com.arudo.blown.core.ui.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arudo.blown.R
 import com.arudo.blown.core.data.source.local.Resource
@@ -14,6 +16,8 @@ class DetailActivity : AppCompatActivity() {
 
     private val detailViewModel: DetailViewModel by viewModel()
     private lateinit var activityDetailBinding: ActivityDetailBinding
+    private var buttonFavorite: Boolean = false
+    private var gameName: String = ""
 
     companion object {
         const val EXTRA_DETAIL = "extra_detail"
@@ -28,6 +32,7 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding.notificationErrorDetail.visibility = View.GONE
         activityDetailBinding.fragmentDetail.visibility = View.GONE
         val gamesId = intent.extras?.getInt(EXTRA_DETAIL) ?: return
+        val contentItemDetail = activityDetailBinding.contentItemDetailGame
         detailViewModel.setGameDetailId(gamesId)
         detailViewModel.games.observe(this, {
             if (it != null) {
@@ -36,11 +41,11 @@ class DetailActivity : AppCompatActivity() {
                         statusLayoutVisibility(Status.Loading)
                     }
                     is Resource.Success -> {
-                        val contentItemDetail = activityDetailBinding.contentItemDetailGame
+                        gameName = it.data!!.name
                         BackgroundImageContainer(
                             null,
                             this,
-                            it.data!!.backgroundImage,
+                            it.data.backgroundImage,
                             activityDetailBinding.backgroundImage
                         )
                         contentItemDetail.txtDescription.text = it.data.description
@@ -66,7 +71,36 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         })
+        detailViewModel.favoriteGames(gamesId).observe(this, {
+            if (it != null) {
+                buttonFavorite = it.id == gamesId
+            }
+        })
+        contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
+        contentItemDetail.buttonFavoriteDetail.setOnClickListener {
+            buttonFavorite = !buttonFavorite
+            statusButtonText(buttonFavorite)
+            if (buttonFavorite) {
+                detailViewModel.setGameDetailId(gamesId)
+                toastMessage(it.context, getString(R.string.added_favorite_toast, gameName))
+            } else {
+                detailViewModel.deleteFavoriteGames(gamesId)
+                toastMessage(it.context, getString(R.string.remove_favorite_toast, gameName))
+            }
+        }
         setContentView(activityDetailBinding.root)
+    }
+
+    private fun statusButtonText(buttonBool: Boolean): String {
+        return if (buttonBool) {
+            getString(R.string.added_favorite)
+        } else {
+            getString(R.string.add_favorite)
+        }
+    }
+
+    private fun toastMessage(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onSupportNavigateUp(): Boolean {

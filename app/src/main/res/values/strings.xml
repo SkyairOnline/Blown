@@ -3,6 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
+    <string name="title_favorite">Favorite</string>
     <string name="title_activity_detail">Detail Games</string>
     <string name="game_title">Game Title</string>
     <string name="release_date">Release Date</string>
@@ -10,6 +11,8 @@
     <string name="image_background_game">Image Background Game</string>
     <string name="there_is_an_error_here">There is an error here</string>
     <string name="startSearch">You may search in this page.</string>
+    <string name="startFavorite">This is empty.. Maybe you start adding your favorite game..</string>
+    <string name="removeFavoriteMessage">You just removed %1$s from your Favorite</string>
     <string name="searchHint">Search Here</string>
     <string name="rating">Rating</string>
     <string name="ratingNumber">%1$.1f \u2605</string>
@@ -20,6 +23,9 @@
     <string name="playtime">Playtime</string>
     <string name="playtimeNumber">%1$d hours</string>
     <string name="add_favorite">★ Add this to your favorite</string>
+    <string name="added_favorite">Well done. This is your favorite game</string>
+    <string name="added_favorite_toast">You have added %1$s from your favorites :)</string>
+    <string name="remove_favorite_toast">You have removed %1$s from your favorites :(</string>
     <string name="game_description">Game Description</string>
     <string name="website">Website</string>
     <string name="review">Review</string>
