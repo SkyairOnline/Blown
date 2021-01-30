@@ -1,9 +1,7 @@
 package com.arudo.blown.core.ui.detail
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.arudo.blown.R
 import com.arudo.blown.core.data.source.local.Resource
@@ -72,20 +70,16 @@ class DetailActivity : AppCompatActivity() {
             }
         })
         detailViewModel.favoriteGames(gamesId).observe(this, {
-            if (it != null) {
-                buttonFavorite = it.id == gamesId
-            }
+            buttonFavorite = it != null && it.id == gamesId
+            contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
         })
-        contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
         contentItemDetail.buttonFavoriteDetail.setOnClickListener {
             buttonFavorite = !buttonFavorite
             contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
             if (buttonFavorite) {
                 detailViewModel.insertFavoriteGames(gamesId)
-                toastMessage(it.context, getString(R.string.added_favorite_toast, gameName))
             } else {
                 detailViewModel.deleteFavoriteGames(gamesId)
-                toastMessage(it.context, getString(R.string.remove_favorite_toast, gameName))
             }
         }
         setContentView(activityDetailBinding.root)
@@ -97,10 +91,6 @@ class DetailActivity : AppCompatActivity() {
         } else {
             getString(R.string.add_favorite)
         }
-    }
-
-    private fun toastMessage(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onSupportNavigateUp(): Boolean {

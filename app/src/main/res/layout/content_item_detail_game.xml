@@ -22,7 +22,6 @@
         android:id="@+id/buttonFavoriteDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_favorite"
         android:textStyle="bold"
         android:theme="@style/button"
         app:layout_constraintBottom_toTopOf="@+id/descriptionDetail"
