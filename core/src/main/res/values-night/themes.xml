@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="cardHorizontal" parent="Theme.Blown">
+        <item name="android:background">@drawable/list_item_game_background</item>
+    </style>
+</resources>

@@ -2,10 +2,10 @@ package com.arudo.blown.di
 
 import com.arudo.blown.core.domain.usecase.BlownUseCase
 import com.arudo.blown.core.domain.usecase.IBlownUseCase
-import com.arudo.blown.core.ui.detail.DetailViewModel
-import com.arudo.blown.core.ui.main.favorite.FavoriteViewModel
-import com.arudo.blown.core.ui.main.home.HomeViewModel
-import com.arudo.blown.core.ui.main.search.SearchViewModel
+import com.arudo.blown.ui.detail.DetailViewModel
+import com.arudo.blown.ui.main.favorite.FavoriteViewModel
+import com.arudo.blown.ui.main.home.HomeViewModel
+import com.arudo.blown.ui.main.search.SearchViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module

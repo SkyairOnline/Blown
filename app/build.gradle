@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-parcelize'
-    id 'kotlin-kapt'
 }
+
+apply from: '../shared_dependencies.gradle'
 
 android {
     compileSdkVersion 30
@@ -16,7 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "KEY", "\"a67f34db72de4bcd8b2512c2fb9ca479\"")
     }
 
     buildTypes {
@@ -38,31 +37,6 @@ android {
 }
 
 dependencies {
+    implementation project(":core")
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.appcompat:appcompat:$appcompact_version"
-    implementation "com.google.android.material:material:$google_android_material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    implementation "com.squareup.retrofit2:retrofit:$squereup_retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-gson:$squereup_retrofit2_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$squareup_okhttp3_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
-    implementation "com.github.bumptech.glide:glide:$github_bumptech_glide_version"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefeshlayout_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$jetbrains_kotlinx_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$jetbrains_kotlinx_version"
-    implementation "com.github.smarteist:autoimageslider:$github_smarteist_version"
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$ext_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
 }

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.arudo.blown.core.ui.main.home.HomeFragment"
+        android:name="com.arudo.blown.ui.main.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.arudo.blown.core.ui.main.search.SearchFragment"
+        android:name="com.arudo.blown.ui.main.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.arudo.blown.core.ui.main.favorite.FavoriteFragment"
+        android:name="com.arudo.blown.ui.main.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
         tools:layout="@layout/fragment_favorite" />
 

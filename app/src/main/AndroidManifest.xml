@@ -14,11 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blown">
         <activity
-            android:name=".core.ui.detail.DetailActivity"
+            android:name=".ui.detail.DetailActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_detail" />
         <activity
-            android:name=".core.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_main">
             <intent-filter>
