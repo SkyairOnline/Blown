@@ -19,7 +19,7 @@ class BlownUseCase(private val iBlownRepository: IBlownRepository) : IBlownUseCa
     override fun getListGamesFavorites(): Flow<PagedList<Games>> =
         iBlownRepository.getListGamesFavorites()
 
-    override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames> =
+    override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames?> =
         iBlownRepository.getGamesFavorite(favoriteGamesId)
 
     override suspend fun insertFavoriteGame(favoriteGamesId: Int) =

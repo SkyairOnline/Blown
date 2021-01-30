@@ -73,7 +73,14 @@ object DataMapper {
         website = input.website
     )
 
-    fun mapFavoriteGamesEntitiesToDomain(input: FavoriteGamesEntity): FavoriteGames = FavoriteGames(
-        id = input.id
-    )
+    fun mapFavoriteGamesEntitiesToDomain(input: FavoriteGamesEntity?): FavoriteGames? {
+        return if (input != null) {
+            FavoriteGames(
+                id = input.id
+            )
+        } else {
+            null
+        }
+
+    }
 }

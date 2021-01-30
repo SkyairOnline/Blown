@@ -79,7 +79,7 @@ class DetailActivity : AppCompatActivity() {
         contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
         contentItemDetail.buttonFavoriteDetail.setOnClickListener {
             buttonFavorite = !buttonFavorite
-            statusButtonText(buttonFavorite)
+            contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
             if (buttonFavorite) {
                 detailViewModel.insertFavoriteGames(gamesId)
                 toastMessage(it.context, getString(R.string.added_favorite_toast, gameName))

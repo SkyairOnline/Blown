@@ -11,7 +11,7 @@ interface IBlownRepository {
     fun getDetailGame(gamesId: Int): Flow<Resource<Games>>
     fun getSearchGames(search: String): Flow<Resource<List<Games>>>
     fun getListGamesFavorites(): Flow<PagedList<Games>>
-    fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames>
+    fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames?>
     suspend fun insertFavoriteGame(favoriteGamesId: Int)
     suspend fun deleteFavoriteGame(favoriteGamesId: Int)
 }

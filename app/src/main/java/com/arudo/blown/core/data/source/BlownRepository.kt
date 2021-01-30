@@ -67,7 +67,7 @@ class BlownRepository(
     ).build().asFlow()
 
 
-    override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames> =
+    override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames?> =
         localDataSource.getGamesFavorite(favoriteGamesId).map {
             DataMapper.mapFavoriteGamesEntitiesToDomain(it)
         }

@@ -7,7 +7,6 @@ import com.arudo.blown.core.data.source.local.room.BlownDatabase
 import com.arudo.blown.core.data.source.remote.RemoteDataSource
 import com.arudo.blown.core.data.source.remote.network.ApiService
 import com.arudo.blown.core.domain.repository.IBlownRepository
-import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -58,9 +57,6 @@ val apiModule = module {
 val repositoryModule = module {
     single {
         LocalDataSource(get())
-    }
-    factory {
-        Dispatchers.IO
     }
     single {
         RemoteDataSource(get(), get())
