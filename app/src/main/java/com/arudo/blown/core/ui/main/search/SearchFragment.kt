@@ -4,14 +4,14 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ImageView
 import android.widget.SearchView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.arudo.blown.R
 import com.arudo.blown.core.data.source.local.Resource
+import com.arudo.blown.core.ui.main.MainActivity
 import com.arudo.blown.core.utils.Status
 import com.arudo.blown.databinding.FragmentSearchBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -29,14 +29,40 @@ class SearchFragment : Fragment() {
         fragmentSearchBinding.notificationErrorSearch.visibility = View.GONE
         fragmentSearchBinding.notificationForSearch.visibility = View.VISIBLE
         fragmentSearchBinding.progressBarSearch.visibility = View.GONE
-        fragmentSearchBinding.searchBarGame.visibility = View.VISIBLE
         fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.adapter = searchAdapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.search_bar_manu, menu)
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = fragmentSearchBinding.searchBarGame.apply {
-            isIconifiedByDefault = false
-            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        val searchView =
+            SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
+        menu.findItem(R.id.app_bar_search).apply {
+            setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+            actionView = searchView
         }
+        val searchIcon: ImageView = searchView.findViewById(
+            searchView.context.resources.getIdentifier(
+                "android:id/search_mag_icon",
+                null,
+                null
+            )
+        )
+        val searchCloseIcon: ImageView = searchView.findViewById(
+            searchView.context.resources.getIdentifier(
+                "android:id/search_close_btn",
+                null,
+                null
+            )
+        )
+        searchView.isIconifiedByDefault = false
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        searchView.queryHint = getString(R.string.searchHint)
+        searchIcon.setImageResource(R.drawable.ic_search)
+        searchCloseIcon.setImageResource(R.drawable.ic_clear)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -93,6 +119,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 }

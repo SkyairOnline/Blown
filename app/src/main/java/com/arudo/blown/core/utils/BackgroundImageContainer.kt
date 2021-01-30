@@ -13,32 +13,32 @@ import com.bumptech.glide.request.RequestOptions
 fun BackgroundImageContainer(
     context: Context? = null,
     activity: Activity? = null,
-    imagePath: String,
+    imagePath: String? = null,
     view: ImageView
 ) {
+    if (imagePath != null) {
+        lateinit var circularProgressDrawable: CircularProgressDrawable
 
-    lateinit var circularProgressDrawable: CircularProgressDrawable
-
-    if (context != null) {
-        circularProgressDrawable = CircularProgressDrawable(context)
-        circularProgressDrawable.centerRadius = 10f
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.start()
-        Glide.with(context).load(imagePath).apply(
-            RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
-                .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
-                .error(R.drawable.ic_broken_image)
-        ).into(view)
-    } else if (activity != null) {
-        circularProgressDrawable = CircularProgressDrawable(activity)
-        circularProgressDrawable.centerRadius = 10f
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.start()
-        Glide.with(activity).load(imagePath).apply(
-            RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
-                .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
-                .error(R.drawable.ic_broken_image)
-        ).into(view)
+        if (context != null) {
+            circularProgressDrawable = CircularProgressDrawable(context)
+            circularProgressDrawable.centerRadius = 10f
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.start()
+            Glide.with(context).load(imagePath).apply(
+                RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
+                    .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
+                    .error(R.drawable.ic_broken_image)
+            ).into(view)
+        } else if (activity != null) {
+            circularProgressDrawable = CircularProgressDrawable(activity)
+            circularProgressDrawable.centerRadius = 10f
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.start()
+            Glide.with(activity).load(imagePath).apply(
+                RequestOptions.overrideOf(640, 360).placeholder(circularProgressDrawable)
+                    .transform(CenterCrop(), GranularRoundedCorners(15F, 15F, 0F, 0F))
+                    .error(R.drawable.ic_broken_image)
+            ).into(view)
+        }
     }
-
 }

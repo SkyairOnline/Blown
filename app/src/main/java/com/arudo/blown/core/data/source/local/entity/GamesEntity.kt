@@ -8,20 +8,20 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "gamesEntity")
 data class GamesEntity(
 
-    @NonNull
-    val suggestionsCount: Int,
+    @Nullable
+    val suggestionsCount: Int?,
 
-    @NonNull
-    val rating: Double,
+    @Nullable
+    val rating: Double?,
 
     @Nullable
     val reviewsTextCount: Int?,
 
-    @NonNull
-    val playtime: Int,
+    @Nullable
+    val playtime: Int?,
 
-    @NonNull
-    val backgroundImage: String,
+    @Nullable
+    val backgroundImage: String?,
 
     @Nullable
     val ratingTop: Int?,
@@ -33,8 +33,8 @@ data class GamesEntity(
     @NonNull
     val id: Int,
 
-    @NonNull
-    val released: String,
+    @Nullable
+    val released: String?,
 
     @Nullable
     val description: String?,
