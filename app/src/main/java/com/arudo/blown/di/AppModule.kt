@@ -3,7 +3,6 @@ package com.arudo.blown.di
 import com.arudo.blown.core.domain.usecase.BlownUseCase
 import com.arudo.blown.core.domain.usecase.IBlownUseCase
 import com.arudo.blown.ui.detail.DetailViewModel
-import com.arudo.blown.ui.main.favorite.FavoriteViewModel
 import com.arudo.blown.ui.main.home.HomeViewModel
 import com.arudo.blown.ui.main.search.SearchViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,9 +24,6 @@ val viewModelModule = module {
     }
     viewModel {
         SearchViewModel(get())
-    }
-    viewModel {
-        FavoriteViewModel(get(), get())
     }
     viewModel {
         DetailViewModel(get(), get())

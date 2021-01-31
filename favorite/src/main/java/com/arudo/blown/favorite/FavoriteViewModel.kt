@@ -1,4 +1,4 @@
-package com.arudo.blown.ui.main.favorite
+package com.arudo.blown.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

@@ -1,4 +1,4 @@
-package com.arudo.blown.ui.main.favorite
+package com.arudo.blown.favorite
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.R
 import com.arudo.blown.core.main.favorite.FavoriteAdapter
 import com.arudo.blown.core.utils.Status
-import com.arudo.blown.databinding.FragmentFavoriteBinding
+import com.arudo.blown.favorite.databinding.FragmentFavoriteBinding
+import com.arudo.blown.favorite.di.favoriteModule
 import com.arudo.blown.ui.detail.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment() {
 
@@ -69,6 +71,7 @@ class FavoriteFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        loadKoinModules(favoriteModule)
         fragmentFavoriteBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return fragmentFavoriteBinding.root
     }
