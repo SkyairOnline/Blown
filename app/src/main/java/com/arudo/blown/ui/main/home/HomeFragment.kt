@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentHomeBinding.progressBar.visibility = View.VISIBLE
-        fragmentHomeBinding.notificationError.visibility = View.GONE
+        fragmentHomeBinding.notificationError.root.visibility = View.GONE
         fragmentHomeBinding.rvHorizontalGame.visibility = View.GONE
         val homeAdapter = HomeAdapter()
         fragmentHomeBinding.rvHorizontalGame.adapter = homeAdapter
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
 
     private fun statusLayoutVisibility(status: Status) {
         fragmentHomeBinding.progressBar.visibility = View.GONE
-        fragmentHomeBinding.notificationError.visibility = View.GONE
+        fragmentHomeBinding.notificationError.root.visibility = View.GONE
         fragmentHomeBinding.rvHorizontalGame.visibility = View.GONE
 
         when (status) {
@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
                 fragmentHomeBinding.rvHorizontalGame.visibility = View.VISIBLE
             }
             Status.Error -> {
-                fragmentHomeBinding.notificationError.visibility = View.VISIBLE
+                fragmentHomeBinding.notificationError.root.visibility = View.VISIBLE
             }
             Status.Loading -> {
                 fragmentHomeBinding.progressBar.visibility = View.VISIBLE

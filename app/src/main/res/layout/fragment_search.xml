@@ -15,29 +15,18 @@
         android:progressTint="@color/black"
         android:visibility="gone" />
 
-
-    <TextView
+    <include
         android:id="@+id/notificationErrorSearch"
+        layout="@layout/error_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/black"
-        android:padding="10dp"
-        android:text="@string/there_is_an_error_here"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:visibility="gone" />
 
-    <TextView
+    <include
         android:id="@+id/notificationForSearch"
+        layout="@layout/search_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/black"
-        android:padding="10dp"
-        android:text="@string/startSearch"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

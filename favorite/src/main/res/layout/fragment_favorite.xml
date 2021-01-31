@@ -15,16 +15,11 @@
         android:progressTint="@color/black"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/notificationForFavorite"
+    <include
+        android:id="@+id/notificationFavoriteStart"
+        layout="@layout/favorite_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/black"
-        android:padding="10dp"
-        android:text="@string/startFavorite"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

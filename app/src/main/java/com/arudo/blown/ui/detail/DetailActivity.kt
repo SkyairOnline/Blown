@@ -27,7 +27,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         activityDetailBinding.progressBarDetail.visibility = View.VISIBLE
-        activityDetailBinding.notificationErrorDetail.visibility = View.GONE
+        activityDetailBinding.notificationErrorDetail.root.visibility = View.GONE
         activityDetailBinding.fragmentDetail.visibility = View.GONE
         val gamesId = intent.extras?.getInt(EXTRA_DETAIL) ?: return
         val contentItemDetail = activityDetailBinding.contentItemDetailGame
@@ -100,7 +100,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun statusLayoutVisibility(status: Status) {
         activityDetailBinding.progressBarDetail.visibility = View.GONE
-        activityDetailBinding.notificationErrorDetail.visibility = View.GONE
+        activityDetailBinding.notificationErrorDetail.root.visibility = View.GONE
         activityDetailBinding.fragmentDetail.visibility = View.GONE
 
         when (status) {
@@ -108,7 +108,7 @@ class DetailActivity : AppCompatActivity() {
                 activityDetailBinding.fragmentDetail.visibility = View.VISIBLE
             }
             Status.Error -> {
-                activityDetailBinding.notificationErrorDetail.visibility = View.VISIBLE
+                activityDetailBinding.notificationErrorDetail.root.visibility = View.VISIBLE
             }
             Status.Loading -> {
                 activityDetailBinding.progressBarDetail.visibility = View.VISIBLE

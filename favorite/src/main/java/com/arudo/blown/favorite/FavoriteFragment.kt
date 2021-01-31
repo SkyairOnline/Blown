@@ -50,7 +50,7 @@ class FavoriteFragment : Fragment() {
 
     private fun statusLayoutVisibility(status: Status) {
         fragmentFavoriteBinding.progressBarFavorite.visibility = View.GONE
-        fragmentFavoriteBinding.notificationForFavorite.visibility = View.GONE
+        fragmentFavoriteBinding.notificationFavoriteStart.root.visibility = View.GONE
         fragmentFavoriteBinding.rvHorizontalFavoriteGame.visibility = View.GONE
 
         when (status) {
@@ -58,7 +58,7 @@ class FavoriteFragment : Fragment() {
                 fragmentFavoriteBinding.rvHorizontalFavoriteGame.visibility = View.VISIBLE
             }
             Status.Error -> {
-                fragmentFavoriteBinding.notificationForFavorite.visibility = View.VISIBLE
+                fragmentFavoriteBinding.notificationFavoriteStart.root.visibility = View.VISIBLE
             }
             Status.Loading -> {
                 fragmentFavoriteBinding.progressBarFavorite.visibility = View.VISIBLE

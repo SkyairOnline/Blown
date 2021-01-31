@@ -29,8 +29,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchAdapter = SearchAdapter()
-        fragmentSearchBinding.notificationErrorSearch.visibility = View.GONE
-        fragmentSearchBinding.notificationForSearch.visibility = View.VISIBLE
+        fragmentSearchBinding.notificationErrorSearch.root.visibility = View.GONE
+        fragmentSearchBinding.notificationForSearch.root.visibility = View.VISIBLE
         fragmentSearchBinding.progressBarSearch.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.adapter = searchAdapter
@@ -104,8 +104,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun statusLayoutVisibility(status: Status) {
-        fragmentSearchBinding.notificationForSearch.visibility = View.GONE
-        fragmentSearchBinding.notificationErrorSearch.visibility = View.GONE
+        fragmentSearchBinding.notificationForSearch.root.visibility = View.GONE
+        fragmentSearchBinding.notificationErrorSearch.root.visibility = View.GONE
         fragmentSearchBinding.progressBarSearch.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
 
@@ -114,7 +114,7 @@ class SearchFragment : Fragment() {
                 fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.VISIBLE
             }
             Status.Error -> {
-                fragmentSearchBinding.notificationErrorSearch.visibility = View.VISIBLE
+                fragmentSearchBinding.notificationErrorSearch.root.visibility = View.VISIBLE
             }
             Status.Loading -> {
                 fragmentSearchBinding.progressBarSearch.visibility = View.VISIBLE
