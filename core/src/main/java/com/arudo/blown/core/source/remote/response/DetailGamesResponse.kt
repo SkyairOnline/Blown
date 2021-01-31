@@ -31,9 +31,6 @@ data class DetailGamesResponse(
     @field:SerializedName("suggestions_count")
     val suggestionsCount: Int,
 
-    @field:SerializedName("background_image_additional")
-    val backgroundImageAdditional: String,
-
     @field:SerializedName("background_image")
     val backgroundImage: String,
 

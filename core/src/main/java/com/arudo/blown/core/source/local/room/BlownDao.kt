@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BlownDao {
-    @Query("SELECT * FROM gamesEntity")
+    @Query("SELECT * FROM gamesEntity order by id desc")
     fun getGames(): Flow<List<GamesEntity>>
 
-    @Query("SELECT * FROM gamesEntity where name like :search")
+    @Query("SELECT * FROM gamesEntity where name like :search order by id desc")
     fun getSearchGames(search: String): Flow<List<GamesEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

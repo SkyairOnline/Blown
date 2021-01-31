@@ -40,8 +40,5 @@ data class GamesEntity(
     val description: String?,
 
     @Nullable
-    val website: String?,
-
-    @Nullable
-    val backgroundImageAdditional: String?,
+    val website: String?
 )
