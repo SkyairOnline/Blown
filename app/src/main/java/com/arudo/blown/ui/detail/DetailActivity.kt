@@ -39,28 +39,31 @@ class DetailActivity : AppCompatActivity() {
                         statusLayoutVisibility(Status.Loading)
                     }
                     is Resource.Success -> {
-                        gameName = it.data!!.name
+                        gameName = it.data?.name ?: ""
                         BackgroundImageContainer(
                             null,
                             this,
-                            it.data!!.backgroundImage,
+                            it.data?.backgroundImage ?: "",
                             activityDetailBinding.backgroundImage
                         )
-                        contentItemDetail.txtDescription.text = it.data!!.description
-                        contentItemDetail.txtGameTitleDetail.text = it.data!!.name
+                        contentItemDetail.txtDescription.text = it.data?.description ?: ""
+                        contentItemDetail.txtGameTitleDetail.text = it.data?.name ?: ""
                         contentItemDetail.txtPlayTimeDetail.text =
-                            getString(R.string.playtimeNumber, it.data!!.playtime)
+                            getString(R.string.playtimeNumber, it.data?.playtime ?: 0)
                         contentItemDetail.txtRatingDetail.text = getString(
                             R.string.ratingNumberDetail,
-                            it.data!!.rating,
-                            it.data!!.ratingTop
+                            it.data?.rating ?: 0.0,
+                            it.data?.ratingTop ?: 0
                         )
-                        contentItemDetail.txtReleaseDateDetail.text = it.data!!.released
+                        contentItemDetail.txtReleaseDateDetail.text = it.data?.released ?: ""
                         contentItemDetail.txtReviewDetail.text =
-                            getString(R.string.reviewNumber, it.data!!.reviewsTextCount)
+                            getString(R.string.reviewNumber, it.data?.reviewsTextCount ?: 0)
                         contentItemDetail.txtSuggestionDetail.text =
-                            getString(R.string.suggested_byNumberDetail, it.data!!.suggestionsCount)
-                        contentItemDetail.txtWebsiteDetail.text = it.data!!.website
+                            getString(
+                                R.string.suggested_byNumberDetail,
+                                it.data?.suggestionsCount ?: 0
+                            )
+                        contentItemDetail.txtWebsiteDetail.text = it.data?.website ?: ""
                         statusLayoutVisibility(Status.Success)
                     }
                     is Resource.Error -> {

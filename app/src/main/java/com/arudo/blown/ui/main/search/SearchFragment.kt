@@ -67,15 +67,20 @@ class SearchFragment : Fragment() {
         searchIcon.setImageResource(R.drawable.ic_search)
         searchCloseIcon.setImageResource(R.drawable.ic_clear)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+            override fun onQueryTextSubmit(query: String): Boolean {
+                loadSearch(query)
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                loadSearch(newText)
-                return true
+                return false
             }
         })
+        searchAdapter.onClickListenerItem = {
+            val intent = Intent(activity, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_DETAIL, it)
+            startActivity(intent)
+        }
     }
 
     private fun loadSearch(text: String) {
@@ -96,11 +101,6 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-        searchAdapter.onClickListenerItem = {
-            val intent = Intent(activity, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_DETAIL, it)
-            startActivity(intent)
-        }
     }
 
     private fun statusLayoutVisibility(status: Status) {

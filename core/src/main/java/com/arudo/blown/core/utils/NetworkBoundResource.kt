@@ -20,6 +20,12 @@ fun <ResultType, RequestType> NetworkBoundResource(
             }
             is ApiResponse.Error -> {
                 emit(Resource.Error<ResultType>(responseStatus.msg))
+                val dataSource = loadFromDatabase().first()
+                if (dataSource != null) {
+                    emitAll(loadFromDatabase().map {
+                        Resource.Success(it)
+                    })
+                }
             }
         }
     }
