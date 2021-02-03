@@ -49,10 +49,10 @@ class DetailActivity : AppCompatActivity() {
                         contentItemDetail.txtDescription.text = it.data?.description ?: ""
                         contentItemDetail.txtGameTitleDetail.text = it.data?.name ?: ""
                         contentItemDetail.txtPlayTimeDetail.text =
-                            getString(R.string.playtimeNumber, it.data?.playtime ?: 0)
+                            getString(R.string.playtimeNumber, it.data?.playtime as Int)
                         contentItemDetail.txtRatingDetail.text = getString(
                             R.string.ratingNumberDetail,
-                            it.data?.rating ?: 0.0,
+                            it.data?.rating as Double,
                             it.data?.ratingTop ?: 0
                         )
                         contentItemDetail.txtReleaseDateDetail.text = it.data?.released ?: ""
