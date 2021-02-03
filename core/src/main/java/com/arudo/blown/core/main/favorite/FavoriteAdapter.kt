@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.core.databinding.ItemSmallGameBinding
 import com.arudo.blown.core.domain.model.Games
-import com.arudo.blown.core.utils.BackgroundImageContainer
+import com.arudo.blown.core.utils.backgroundImageContainer
 
 class FavoriteAdapter : PagedListAdapter<Games, FavoriteAdapter.FavoriteViewHolder>(diffCallback) {
 
@@ -43,7 +43,7 @@ class FavoriteAdapter : PagedListAdapter<Games, FavoriteAdapter.FavoriteViewHold
             with(holder) {
                 with(it) {
                     val contextHolder = holder.itemView.context
-                    BackgroundImageContainer(
+                    backgroundImageContainer(
                         contextHolder,
                         null,
                         backgroundImage,

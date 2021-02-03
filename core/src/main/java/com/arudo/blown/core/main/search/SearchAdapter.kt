@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.core.databinding.ItemSmallGameBinding
 import com.arudo.blown.core.domain.model.Games
-import com.arudo.blown.core.utils.BackgroundImageContainer
+import com.arudo.blown.core.utils.backgroundImageContainer
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private val searchGamesData = ArrayList<Games>()
@@ -31,7 +31,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         with(holder) {
             with(searchGamesData[position]) {
                 val contextHolder = holder.itemView.context
-                BackgroundImageContainer(
+                backgroundImageContainer(
                     contextHolder,
                     null,
                     backgroundImage,

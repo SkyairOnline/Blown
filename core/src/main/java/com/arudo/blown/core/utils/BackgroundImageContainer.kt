@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
-fun BackgroundImageContainer(
+fun backgroundImageContainer(
     context: Context? = null,
     activity: Activity? = null,
     imagePath: String? = null,

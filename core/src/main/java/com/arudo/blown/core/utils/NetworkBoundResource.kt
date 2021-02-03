@@ -4,7 +4,7 @@ import com.arudo.blown.core.source.local.Resource
 import com.arudo.blown.core.source.remote.network.ApiResponse
 import kotlinx.coroutines.flow.*
 
-fun <ResultType, RequestType> NetworkBoundResource(
+fun <ResultType, RequestType> networkBoundResource(
     loadFromDatabase: () -> Flow<ResultType>,
     networkCall: suspend () -> Flow<ApiResponse<RequestType>>,
     saveCallResult: suspend (RequestType) -> Unit

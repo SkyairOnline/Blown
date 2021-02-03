@@ -5,8 +5,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.arudo.blown.R
 import com.arudo.blown.core.source.local.Resource
-import com.arudo.blown.core.utils.BackgroundImageContainer
 import com.arudo.blown.core.utils.Status
+import com.arudo.blown.core.utils.backgroundImageContainer
 import com.arudo.blown.databinding.ActivityDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -40,7 +40,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                     is Resource.Success -> {
                         gameName = it.data?.name ?: ""
-                        BackgroundImageContainer(
+                        backgroundImageContainer(
                             null,
                             this,
                             it.data?.backgroundImage ?: "",

@@ -11,7 +11,7 @@ import com.arudo.blown.core.source.local.Resource
 import com.arudo.blown.core.source.local.entity.FavoriteGamesEntity
 import com.arudo.blown.core.source.remote.RemoteDataSource
 import com.arudo.blown.core.utils.DataMapper
-import com.arudo.blown.core.utils.NetworkBoundResource
+import com.arudo.blown.core.utils.networkBoundResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -20,7 +20,7 @@ class BlownRepository(
     private val remoteDataSource: RemoteDataSource
 ) : IBlownRepository {
 
-    override fun getGames(): Flow<Resource<List<Games>>> = NetworkBoundResource(
+    override fun getGames(): Flow<Resource<List<Games>>> = networkBoundResource(
         {
             localDataSource.getGames().map {
                 DataMapper.mapListGamesEntitiesToDomain(it)
@@ -33,7 +33,7 @@ class BlownRepository(
         }
     )
 
-    override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> = NetworkBoundResource(
+    override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> = networkBoundResource(
         {
             localDataSource.getDetailGames(gamesId).map {
                 DataMapper.mapGamesEntitiesToDomain(it)
@@ -47,7 +47,7 @@ class BlownRepository(
     )
 
 
-    override fun getSearchGames(search: String): Flow<Resource<List<Games>>> = NetworkBoundResource(
+    override fun getSearchGames(search: String): Flow<Resource<List<Games>>> = networkBoundResource(
         {
             localDataSource.getSearchGames(search).map {
                 DataMapper.mapListGamesEntitiesToDomain(it)

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.core.R
 import com.arudo.blown.core.databinding.ItemGameBinding
 import com.arudo.blown.core.domain.model.Games
-import com.arudo.blown.core.utils.BackgroundImageContainer
+import com.arudo.blown.core.utils.backgroundImageContainer
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     private val gamesData = ArrayList<Games>()
@@ -31,7 +31,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
             with(gamesData[position]) {
                 val contextHolder = holder.itemView.context
                 val contentItemGameBinding = itemGameBinding.contentItemGame
-                BackgroundImageContainer(
+                backgroundImageContainer(
                     contextHolder,
                     null,
                     backgroundImage,
