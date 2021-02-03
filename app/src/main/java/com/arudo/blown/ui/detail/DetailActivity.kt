@@ -53,15 +53,15 @@ class DetailActivity : AppCompatActivity() {
                         contentItemDetail.txtRatingDetail.text = getString(
                             R.string.ratingNumberDetail,
                             it.data?.rating as Double,
-                            it.data?.ratingTop ?: 0
+                            it.data?.ratingTop as Int
                         )
                         contentItemDetail.txtReleaseDateDetail.text = it.data?.released ?: ""
                         contentItemDetail.txtReviewDetail.text =
-                            getString(R.string.reviewNumber, it.data?.reviewsTextCount ?: 0)
+                            getString(R.string.reviewNumber, it.data?.reviewsTextCount as Int)
                         contentItemDetail.txtSuggestionDetail.text =
                             getString(
                                 R.string.suggested_byNumberDetail,
-                                it.data?.suggestionsCount ?: 0
+                                it.data?.suggestionsCount as Int
                             )
                         contentItemDetail.txtWebsiteDetail.text = it.data?.website ?: ""
                         statusLayoutVisibility(Status.Success)
