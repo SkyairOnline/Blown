@@ -22,7 +22,8 @@ class FavoriteFragment : Fragment() {
 
     private val favoriteViewModel: FavoriteViewModel by viewModel()
     private lateinit var favoriteAdapter: FavoriteAdapter
-    private lateinit var fragmentFavoriteBinding: FragmentFavoriteBinding
+    private var _fragmentFavoriteBinding: FragmentFavoriteBinding? = null
+    private val fragmentFavoriteBinding get() = _fragmentFavoriteBinding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,7 +73,7 @@ class FavoriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         loadKoinModules(favoriteModule)
-        fragmentFavoriteBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        _fragmentFavoriteBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return fragmentFavoriteBinding.root
     }
 
@@ -101,4 +102,9 @@ class FavoriteFragment : Fragment() {
             }
         }
     })
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentFavoriteBinding = null
+    }
 }

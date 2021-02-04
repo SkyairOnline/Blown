@@ -13,7 +13,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class DetailActivity : AppCompatActivity() {
 
     private val detailViewModel: DetailViewModel by viewModel()
-    private lateinit var activityDetailBinding: ActivityDetailBinding
+    private var _activityDetailBinding: ActivityDetailBinding? = null
+    private val activityDetailBinding get() = _activityDetailBinding!!
     private var buttonFavorite: Boolean = false
     private var gameName: String = ""
 
@@ -25,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
+        _activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         activityDetailBinding.progressBarDetail.visibility = View.VISIBLE
         activityDetailBinding.notificationErrorDetail.root.visibility = View.GONE
         activityDetailBinding.fragmentDetail.visibility = View.GONE
@@ -117,5 +118,10 @@ class DetailActivity : AppCompatActivity() {
                 activityDetailBinding.progressBarDetail.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onDestroy() {
+        _activityDetailBinding = null
+        super.onDestroy()
     }
 }

@@ -23,7 +23,8 @@ class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by viewModel()
     private lateinit var searchAdapter: SearchAdapter
-    private lateinit var fragmentSearchBinding: FragmentSearchBinding
+    private var _fragmentSearchBinding: FragmentSearchBinding? = null
+    private val fragmentSearchBinding get() = _fragmentSearchBinding!!
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -128,7 +129,12 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        fragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false)
+        _fragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false)
         return fragmentSearchBinding.root
+    }
+
+    override fun onDestroyView() {
+        _fragmentSearchBinding = null
+        super.onDestroyView()
     }
 }
