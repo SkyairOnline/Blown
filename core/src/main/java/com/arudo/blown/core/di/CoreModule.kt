@@ -8,6 +8,8 @@ import com.arudo.blown.core.source.local.LocalDataSource
 import com.arudo.blown.core.source.local.room.BlownDatabase
 import com.arudo.blown.core.source.remote.RemoteDataSource
 import com.arudo.blown.core.source.remote.network.ApiService
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -21,6 +23,8 @@ val databaseModule = module {
         get<BlownDatabase>().blownDao()
     }
     single {
+        val passPhrase: ByteArray = SQLiteDatabase.getBytes("arudo".toCharArray())
+        val supportFactory = SupportFactory(passPhrase)
         Room
             .databaseBuilder(
                 androidContext(),
@@ -28,6 +32,7 @@ val databaseModule = module {
                 "Blown.db"
             )
             .fallbackToDestructiveMigration()
+            .openHelperFactory(supportFactory)
             .build()
     }
 }
