@@ -29,4 +29,5 @@ class DetailViewModel(
     fun deleteFavoriteGames(favoriteGamesId: Int) = viewModelScope.launch(coroutineDispatcher) {
         iBlownUseCase.deleteFavoriteGame(favoriteGamesId)
     }
+
 }
