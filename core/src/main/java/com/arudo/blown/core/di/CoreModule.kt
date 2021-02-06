@@ -10,6 +10,7 @@ import com.arudo.blown.core.source.remote.RemoteDataSource
 import com.arudo.blown.core.source.remote.network.ApiService
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -39,6 +40,7 @@ val databaseModule = module {
 
 val apiModule = module {
     single {
+        val hostName = "api.rawg.io"
         OkHttpClient
             .Builder()
             .addInterceptor(
@@ -47,6 +49,15 @@ val apiModule = module {
             )
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(
+                CertificatePinner
+                    .Builder()
+                    .add(hostName, "sha256/UGwY2lttaRoHnGd1gpeydmov1LzioQpzYTywtNSJkAU=")
+                    .add(hostName, "sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=")
+                    .add(hostName, "sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=")
+                    .add(hostName, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+                    .build()
+            )
             .build()
     }
     single {
