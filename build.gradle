@@ -9,7 +9,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$android_tools_build_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -50,4 +49,5 @@ ext{
     squareup_leakcanary_version = '2.6'
     zetetic_version = '4.4.0'
     sqlite_version = '2.1.0'
+    airbnb_android_version = '3.4.2'
 }

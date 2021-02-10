@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imgErrorNotification"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:contentDescription="@string/there_is_an_error_here"
         app:layout_constraintBottom_toTopOf="@id/txtErrorNotification"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_error" />
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="error_animation.json"
+        app:lottie_loop="false" />
 
     <TextView
         android:id="@+id/txtErrorNotification"

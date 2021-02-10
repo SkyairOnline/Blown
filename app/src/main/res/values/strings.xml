@@ -6,6 +6,7 @@
     <string name="title_favorite">Favorite</string>
     <string name="title_activity_detail">Detail Games</string>
     <string name="there_is_an_error_here">There is an error here</string>
+    <string name="startLoading">Please wait…</string>
     <string name="startSearch">You may search in this page.</string>
     <string name="searchHint">Search Here</string>
     <string name="startFavorite">This is empty.. Maybe you start adding your favorite game..</string>

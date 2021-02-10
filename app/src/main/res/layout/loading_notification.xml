@@ -6,27 +6,27 @@
     android:layout_margin="10dp">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/imgSearchNotification"
+        android:id="@+id/imgLoadingNotification"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:layout_constraintBottom_toTopOf="@id/txtSearchNotification"
+        app:layout_constraintBottom_toTopOf="@id/txtLoadingNotification"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="search_animation.json"
-        app:lottie_loop="false" />
+        app:lottie_fileName="loading_animation.json"
+        app:lottie_loop="true" />
 
     <TextView
-        android:id="@+id/txtSearchNotification"
+        android:id="@+id/txtLoadingNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/startSearch"
+        android:text="@string/startLoading"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgSearchNotification" />
+        app:layout_constraintTop_toBottomOf="@id/imgLoadingNotification" />
 </androidx.constraintlayout.widget.ConstraintLayout>

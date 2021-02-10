@@ -32,7 +32,7 @@ class SearchFragment : Fragment() {
         searchAdapter = SearchAdapter()
         fragmentSearchBinding.notificationErrorSearch.root.visibility = View.GONE
         fragmentSearchBinding.notificationForSearch.root.visibility = View.VISIBLE
-        fragmentSearchBinding.progressBarSearch.visibility = View.GONE
+        fragmentSearchBinding.notificationLoadingSearch.root.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.adapter = searchAdapter
     }
@@ -107,7 +107,7 @@ class SearchFragment : Fragment() {
     private fun statusLayoutVisibility(status: Status) {
         fragmentSearchBinding.notificationForSearch.root.visibility = View.GONE
         fragmentSearchBinding.notificationErrorSearch.root.visibility = View.GONE
-        fragmentSearchBinding.progressBarSearch.visibility = View.GONE
+        fragmentSearchBinding.notificationLoadingSearch.root.visibility = View.GONE
         fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
 
         when (status) {
@@ -118,7 +118,7 @@ class SearchFragment : Fragment() {
                 fragmentSearchBinding.notificationErrorSearch.root.visibility = View.VISIBLE
             }
             Status.Loading -> {
-                fragmentSearchBinding.progressBarSearch.visibility = View.VISIBLE
+                fragmentSearchBinding.notificationLoadingSearch.root.visibility = View.VISIBLE
             }
         }
     }
