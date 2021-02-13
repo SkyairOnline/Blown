@@ -6,12 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.search.SearchFragment">
 
-    <include
+    <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/notificationLoadingSearch"
-        layout="@layout/loading_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:shimmer_auto_start="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+
+                <include layout="@layout/item_small_game_loading" />
+            </LinearLayout>
+        </ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <include
         android:id="@+id/notificationErrorSearch"

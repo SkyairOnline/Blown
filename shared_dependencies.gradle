@@ -12,6 +12,7 @@ dependencies{
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "com.airbnb.android:lottie:$airbnb_android_version"
+    implementation "com.facebook.shimmer:shimmer:$facebook_shimmer_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
