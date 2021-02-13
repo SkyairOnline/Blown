@@ -18,19 +18,15 @@ class DetailActivity : AppCompatActivity() {
     private var buttonFavorite: Boolean = false
     private var gameName: String = ""
 
-    companion object {
-        const val EXTRA_DETAIL = "extra_detail"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val gamesId = intent.extras?.getInt("extra_detail") ?: return
         _activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         activityDetailBinding.notificationLoadingDetail.root.visibility = View.VISIBLE
         activityDetailBinding.notificationErrorDetail.root.visibility = View.GONE
         activityDetailBinding.fragmentDetail.visibility = View.GONE
-        val gamesId = intent.extras?.getInt(EXTRA_DETAIL) ?: return
         val contentItemDetail = activityDetailBinding.contentItemDetailGame
         detailViewModel.setGameDetailId(gamesId)
         detailViewModel.games.observe(this, {
@@ -122,6 +118,8 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         _activityDetailBinding = null
+        buttonFavorite = false
+        gameName = ""
         super.onDestroy()
     }
 }
