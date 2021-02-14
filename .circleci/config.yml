@@ -39,4 +39,4 @@ jobs:
           path: app/build/outputs/apk/debug/
           destination: artifact-file
       - codecov/upload:
-          file: {{ coverage_report_filepath }}
+          file: coverageReport.xml
