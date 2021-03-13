@@ -1,11 +1,22 @@
 <resources>
-    <string name="ratingNumber">%1$.1f \u2605</string>
-    <string name="suggested_byNumber">%1$d \u2764</string>
-    <string name="playtimeNumber">%1$d Jam</string>
-    <string name="game_title">Judul Game</string>
-    <string name="release_date">Tahun Pengeluaran</string>
-    <string name="playtime">Waktu Pemutaran</string>
-    <string name="rating">Rating</string>
-    <string name="suggested_by">Disarankan</string>
-    <string name="image_background_game">Gambar Latar Belakang game</string>
+    <string name="app_name">Blown</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home Blown</string>
+    <string name="title_search">Pencarian Blown</string>
+    <string name="title_favorite">Kesukaan Blown</string>
+    <string name="title_activity_detail">Detail Games</string>
+    <string name="there_is_an_error_here">Ada error disini</string>
+    <string name="startLoading">Harap menungggu…</string>
+    <string name="startSearch">Kamu bisa mencari di page ini.</string>
+    <string name="searchHint">Cari disini</string>
+    <string name="startFavorite">Disini kosong.. Mungkin kamu bisa mencari kesukaan game kamu dulu..</string>
+    <string name="removeFavoriteMessage">Kamu baru saja menghilangkan %1$s di game kesukaanmu</string>
+    <string name="ratingNumberDetail">%1$.1f / %2$d</string>
+    <string name="suggested_byNumberDetail">%1$d orang</string>
+    <string name="add_favorite">★ Tanmbahkan ke dalam game kesukaanmu</string>
+    <string name="added_favorite">Mantap. Ini adalah game kesukaanmu</string>
+    <string name="game_description">Deskripsi game</string>
+    <string name="website">Website</string>
+    <string name="review">Review</string>
+    <string name="reviewNumber">%1$d Reviewers</string>
 </resources>
