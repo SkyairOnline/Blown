@@ -24,6 +24,13 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/cardview_dark_background">
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragmentDetail"
             android:layout_width="match_parent"

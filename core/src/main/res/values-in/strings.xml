@@ -1,0 +1,11 @@
+<resources>
+    <string name="ratingNumber">%1$.1f \u2605</string>
+    <string name="suggested_byNumber">%1$d \u2764</string>
+    <string name="playtimeNumber">%1$d Jam</string>
+    <string name="game_title">Judul Game</string>
+    <string name="release_date">Tahun Pengeluaran</string>
+    <string name="playtime">Waktu Pemutaran</string>
+    <string name="rating">Rating</string>
+    <string name="suggested_by">Disarankan</string>
+    <string name="image_background_game">Gambar Latar Belakang game</string>
+</resources>
