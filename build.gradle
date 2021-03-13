@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = '1.4.30'
+    ext.kotlin_version = '1.4.31'
     ext.android_tools_build_version = '4.1.2'
     repositories {
         google()
@@ -41,7 +41,7 @@ ext{
     squareup_okhttp3_version = '5.0.0-alpha.2'
     paging_version = '2.1.2'
     lifecycle_version = '2.3.0'
-    navigation_version = '2.3.3'
+    navigation_version = '2.3.4'
     github_bumptech_glide_version = '4.11.0'
     swiperefeshlayout_version = '1.1.0'
     jetbrains_kotlinx_version = '1.4.2'
