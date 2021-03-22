@@ -24,8 +24,8 @@ interface BlownDao {
     @Update
     suspend fun updateDetailGames(games: GamesEntity)
 
-    @Query("SELECT * From gamesEntity a join favoriteGamesEntity b on a.gamesId = b.gamesId")
-    fun getListGamesFavorites(): PagingSource<Int, GamesEntity>
+    @Query("SELECT * From favoriteGamesEntity")
+    fun getListGamesFavorites(): Flow<List<FavoriteGamesEntity>>
 
     @Query("SELECT * FROM favoriteGamesEntity where gamesId = :id")
     fun getGamesFavorite(id: Int): Flow<FavoriteGamesEntity>

@@ -1,6 +1,7 @@
 package com.arudo.blown.ui.detail
 
 import androidx.lifecycle.*
+import com.arudo.blown.core.domain.model.FavoriteGames
 import com.arudo.blown.core.domain.usecase.IBlownUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -22,12 +23,14 @@ class DetailViewModel(
     fun favoriteGames(favoriteGamesId: Int) =
         iBlownUseCase.getGamesFavorite(favoriteGamesId).asLiveData()
 
-    fun insertFavoriteGames(favoriteGamesId: Int) = viewModelScope.launch(coroutineDispatcher) {
-        iBlownUseCase.insertFavoriteGame(favoriteGamesId)
-    }
+    fun insertFavoriteGames(favoriteGames: FavoriteGames) =
+        viewModelScope.launch(coroutineDispatcher) {
+            iBlownUseCase.insertFavoriteGame(favoriteGames)
+        }
 
-    fun deleteFavoriteGames(favoriteGamesId: Int) = viewModelScope.launch(coroutineDispatcher) {
-        iBlownUseCase.deleteFavoriteGame(favoriteGamesId)
-    }
+    fun deleteFavoriteGames(favoriteGames: FavoriteGames) =
+        viewModelScope.launch(coroutineDispatcher) {
+            iBlownUseCase.deleteFavoriteGame(favoriteGames)
+        }
 
 }

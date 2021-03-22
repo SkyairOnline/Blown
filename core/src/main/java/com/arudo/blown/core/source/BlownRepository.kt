@@ -67,27 +67,31 @@ class BlownRepository(
         DataMapper.mapListGamesEntitiesToDomain(it)
     }
 
-    override fun getListGamesFavorites(): Flow<PagingData<Games>> = Pager(
-        config = PagingConfig(
-            pageSize = pageSize,
-            enablePlaceholders = false
-        ),
-        remoteMediator = BlownGamesMediator(localDataSource, remoteDataSource),
-        pagingSourceFactory = {
-            localDataSource.getListGamesFavorites()
+    override fun getListGamesFavorites(): Flow<List<FavoriteGames>> =
+        localDataSource.getListGamesFavorites().map {
+            DataMapper.mapListFavoriteGamesEntitiesToDomain(it)
         }
-    ).flow.map {
-        DataMapper.mapListGamesEntitiesToDomain(it)
-    }
 
     override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames?> =
         localDataSource.getGamesFavorite(favoriteGamesId).map {
             DataMapper.mapFavoriteGamesEntitiesToDomain(it)
         }
 
-    override suspend fun insertFavoriteGame(favoriteGamesId: Int) =
-        localDataSource.insertFavoriteGame(FavoriteGamesEntity(favoriteGamesId))
+    override suspend fun insertFavoriteGame(favoriteGames: FavoriteGames) =
+        localDataSource.insertFavoriteGame(
+            FavoriteGamesEntity(
+                favoriteGames.gamesId,
+                favoriteGames.backgroundImage,
+                favoriteGames.name
+            )
+        )
 
-    override suspend fun deleteFavoriteGame(favoriteGamesId: Int) =
-        localDataSource.deleteFavoriteGame(FavoriteGamesEntity(favoriteGamesId))
+    override suspend fun deleteFavoriteGame(favoriteGames: FavoriteGames) =
+        localDataSource.deleteFavoriteGame(
+            FavoriteGamesEntity(
+                favoriteGames.gamesId,
+                favoriteGames.backgroundImage,
+                favoriteGames.name
+            )
+        )
 }

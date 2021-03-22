@@ -22,8 +22,7 @@ class LocalDataSource(private val blownDao: BlownDao) {
 
     suspend fun updateDetailGames(games: GamesEntity) = blownDao.updateDetailGames(games)
 
-    fun getListGamesFavorites(): PagingSource<Int, GamesEntity> =
-        blownDao.getListGamesFavorites()
+    fun getListGamesFavorites(): Flow<List<FavoriteGamesEntity>> = blownDao.getListGamesFavorites()
 
     fun getGamesFavorite(id: Int): Flow<FavoriteGamesEntity> = blownDao.getGamesFavorite(id)
 

@@ -14,7 +14,7 @@ import com.arudo.blown.core.utils.Converter
         FavoriteGamesEntity::class,
         RemotePageKeysEntity::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(Converter::class)

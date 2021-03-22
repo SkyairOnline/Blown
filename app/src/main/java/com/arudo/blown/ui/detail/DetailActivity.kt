@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.arudo.blown.R
+import com.arudo.blown.core.domain.model.FavoriteGames
 import com.arudo.blown.core.source.local.Resource
 import com.arudo.blown.core.utils.Status
 import com.arudo.blown.core.utils.backgroundImageContainer
@@ -17,6 +18,7 @@ class DetailActivity : AppCompatActivity() {
     private val activityDetailBinding get() = _activityDetailBinding!!
     private var buttonFavorite: Boolean = false
     private var gameName: String = ""
+    private var favoriteGame: FavoriteGames? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +64,8 @@ class DetailActivity : AppCompatActivity() {
                             )
                         contentItemDetail.txtWebsiteDetail.text = it.data?.website ?: ""
                         statusLayoutVisibility(Status.Success)
+                        favoriteGame =
+                            FavoriteGames(gamesId, it.data?.backgroundImage, it.data?.name)
                     }
                     is Resource.Error -> {
                         statusLayoutVisibility(Status.Error)
@@ -76,11 +80,14 @@ class DetailActivity : AppCompatActivity() {
         contentItemDetail.buttonFavoriteDetail.setOnClickListener {
             buttonFavorite = !buttonFavorite
             contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
-            if (buttonFavorite) {
-                detailViewModel.insertFavoriteGames(gamesId)
-            } else {
-                detailViewModel.deleteFavoriteGames(gamesId)
+            if (favoriteGame != null) {
+                if (buttonFavorite) {
+                    detailViewModel.insertFavoriteGames(favoriteGame!!)
+                } else {
+                    detailViewModel.deleteFavoriteGames(favoriteGame!!)
+                }
             }
+
         }
         setContentView(activityDetailBinding.root)
     }
@@ -117,9 +124,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        super.onDestroy()
         _activityDetailBinding = null
         buttonFavorite = false
         gameName = ""
-        super.onDestroy()
+        favoriteGame = null
     }
 }

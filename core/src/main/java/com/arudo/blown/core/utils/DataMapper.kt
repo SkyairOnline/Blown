@@ -76,10 +76,22 @@ object DataMapper {
         added = input.added
     )
 
+    fun mapListFavoriteGamesEntitiesToDomain(input: List<FavoriteGamesEntity>): List<FavoriteGames> =
+        input.map {
+            FavoriteGames(
+                gamesId = it.gamesId,
+                backgroundImage = it.backgroundImage,
+                name = it.name
+            )
+        }
+
+
     fun mapFavoriteGamesEntitiesToDomain(input: FavoriteGamesEntity?): FavoriteGames? {
         return if (input != null) {
             FavoriteGames(
-                gamesId = input.gamesId
+                gamesId = input.gamesId,
+                backgroundImage = input.backgroundImage,
+                name = input.name
             )
         } else {
             null

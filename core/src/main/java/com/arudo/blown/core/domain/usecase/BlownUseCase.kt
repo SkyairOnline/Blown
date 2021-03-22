@@ -16,15 +16,15 @@ class BlownUseCase(private val iBlownRepository: IBlownRepository) : IBlownUseCa
     override fun getSearchGames(search: String): Flow<PagingData<Games>> =
         iBlownRepository.getSearchGames(search)
 
-    override fun getListGamesFavorites(): Flow<PagingData<Games>> =
+    override fun getListGamesFavorites(): Flow<List<FavoriteGames>> =
         iBlownRepository.getListGamesFavorites()
 
     override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames?> =
         iBlownRepository.getGamesFavorite(favoriteGamesId)
 
-    override suspend fun insertFavoriteGame(favoriteGamesId: Int) =
-        iBlownRepository.insertFavoriteGame(favoriteGamesId)
+    override suspend fun insertFavoriteGame(favoriteGames: FavoriteGames) =
+        iBlownRepository.insertFavoriteGame(favoriteGames)
 
-    override suspend fun deleteFavoriteGame(favoriteGamesId: Int) =
-        iBlownRepository.deleteFavoriteGame(favoriteGamesId)
+    override suspend fun deleteFavoriteGame(favoriteGames: FavoriteGames) =
+        iBlownRepository.deleteFavoriteGame(favoriteGames)
 }
