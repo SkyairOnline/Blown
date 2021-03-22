@@ -8,10 +8,14 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("games")
+    @GET("games/lists/main")
     suspend fun getGames(
-        @Query("key") key: String
-    ): Response<ListGamesResponse>
+        @Query("key") key: String,
+        @Query("discover") discover: Boolean,
+        @Query("ordering") ordering: String,
+        @Query("page") page: Int,
+        @Query("page_size") page_size: Int,
+    ): ListGamesResponse
 
     @GET("games/{id}")
     suspend fun getDetailGames(
@@ -23,6 +27,7 @@ interface ApiService {
     suspend fun getSearchGames(
         @Query("key") key: String,
         @Query("search") search: String,
-        @Query("search_precise") searchPrecise: Boolean
-    ): Response<ListGamesResponse>
+        @Query("page") page: Int,
+        @Query("page_size") page_size: Int,
+    ): ListGamesResponse
 }

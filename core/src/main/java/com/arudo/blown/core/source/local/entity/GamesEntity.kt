@@ -31,7 +31,7 @@ data class GamesEntity(
 
     @PrimaryKey
     @NonNull
-    val id: Int,
+    val gamesId: Int,
 
     @Nullable
     val released: String?,
@@ -40,5 +40,8 @@ data class GamesEntity(
     val description: String?,
 
     @Nullable
-    val website: String?
+    val website: String?,
+
+    @Nullable
+    val added: Int?
 )

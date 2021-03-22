@@ -20,7 +20,7 @@ data class DetailGamesResponse(
     val ratingTop: Int,
 
     @field:SerializedName("id")
-    val id: Int,
+    val gamesId: Int,
 
     @field:SerializedName("released")
     val released: String,
@@ -36,4 +36,7 @@ data class DetailGamesResponse(
 
     @field:SerializedName("name")
     val name: String,
+
+    @field:SerializedName("added")
+    val added: Int
 )

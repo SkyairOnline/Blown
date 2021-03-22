@@ -2,19 +2,19 @@ package com.arudo.blown.core.main.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.core.databinding.ItemSmallGameBinding
 import com.arudo.blown.core.domain.model.Games
 import com.arudo.blown.core.utils.backgroundImageContainer
 
-class FavoriteAdapter : PagedListAdapter<Games, FavoriteAdapter.FavoriteViewHolder>(diffCallback) {
+class FavoriteAdapter : PagingDataAdapter<Games, FavoriteAdapter.FavoriteViewHolder>(diffCallback) {
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<Games>() {
             override fun areItemsTheSame(oldItem: Games, newItem: Games): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.gamesId == newItem.gamesId
             }
 
             override fun areContentsTheSame(oldItem: Games, newItem: Games): Boolean {
@@ -51,7 +51,7 @@ class FavoriteAdapter : PagedListAdapter<Games, FavoriteAdapter.FavoriteViewHold
                     )
                     itemSearchGameBinding.txtTitleSearchGame.text = name
                     holder.itemView.setOnClickListener {
-                        onClickListenerItem?.invoke(id)
+                        onClickListenerItem?.invoke(gamesId)
                     }
                 }
             }

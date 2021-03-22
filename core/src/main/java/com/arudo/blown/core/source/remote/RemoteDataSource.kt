@@ -9,11 +9,12 @@ class RemoteDataSource(
     private val key: String
 ) : BaseDataSource() {
 
-    suspend fun getGames() = getResult({ apiService.getGames(key) }, dispatcher)
+    suspend fun getGames(page: Int, pageSize: Int) =
+        apiService.getGames(key, true, "-added", page, pageSize)
 
     suspend fun getDetailGames(gamesId: Int) =
         getResult({ apiService.getDetailGames(gamesId, key) }, dispatcher)
 
-    suspend fun getSearchGames(search: String) =
-        getResult({ apiService.getSearchGames(key, search, true) }, dispatcher)
+    suspend fun getSearchGames(search: String, page: Int, pageSize: Int) =
+        apiService.getSearchGames(key, search, page, pageSize)
 }

@@ -6,6 +6,7 @@
     <string name="title_favorite">Kesukaan Blown</string>
     <string name="title_activity_detail">Detail Games</string>
     <string name="there_is_an_error_here">Ada error disini</string>
+    <string name="retryButton">Ulang</string>
     <string name="startLoading">Harap menungggu…</string>
     <string name="startSearch">Kamu bisa mencari di page ini.</string>
     <string name="searchHint">Cari disini</string>

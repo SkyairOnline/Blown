@@ -1,6 +1,7 @@
 package com.arudo.blown
 
 import android.app.Application
+import androidx.paging.ExperimentalPagingApi
 import com.arudo.blown.core.di.apiModule
 import com.arudo.blown.core.di.databaseModule
 import com.arudo.blown.core.di.repositoryModule
@@ -11,6 +12,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
+@ExperimentalPagingApi
 class Blown : Application() {
     override fun onCreate() {
         super.onCreate()

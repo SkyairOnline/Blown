@@ -9,32 +9,46 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.arudo.blown.R
 import com.arudo.blown.core.main.search.SearchAdapter
-import com.arudo.blown.core.source.local.Resource
-import com.arudo.blown.core.utils.Status
 import com.arudo.blown.databinding.FragmentSearchBinding
 import com.arudo.blown.ui.detail.DetailActivity
+import com.arudo.blown.ui.main.GamesLoadStateAdapter
 import com.arudo.blown.ui.main.MainActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by viewModel()
-    private lateinit var searchAdapter: SearchAdapter
+    private var searchAdapter = SearchAdapter()
     private var _fragmentSearchBinding: FragmentSearchBinding? = null
     private val fragmentSearchBinding get() = _fragmentSearchBinding!!
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchAdapter = SearchAdapter()
-        fragmentSearchBinding.notificationErrorSearch.root.visibility = View.GONE
-        fragmentSearchBinding.notificationForSearch.root.visibility = View.VISIBLE
-        fragmentSearchBinding.notificationLoadingSearch.visibility = View.GONE
-        fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
-        fragmentSearchBinding.rvHorizontalSearchGame.adapter = searchAdapter
+        fragmentSearchBinding.rvHorizontalSearchGame.adapter = searchAdapter.withLoadStateFooter(
+            footer = GamesLoadStateAdapter { searchAdapter.retry() }
+        )
+        searchAdapter.addLoadStateListener {
+            fragmentSearchBinding.rvHorizontalSearchGame.isVisible =
+                it.source.refresh is LoadState.NotLoading
+            fragmentSearchBinding.notificationLoadingSearch.isVisible =
+                it.source.refresh is LoadState.Loading
+            fragmentSearchBinding.notificationErrorSearch.root.isVisible =
+                it.source.refresh is LoadState.Error
+        }
+        searchAdapter.onClickListenerItem = {
+            val intent = Intent(activity, DetailActivity::class.java)
+            intent.putExtra("extra_detail", it)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -77,48 +91,21 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
-        searchAdapter.onClickListenerItem = {
-            val intent = Intent(activity, DetailActivity::class.java)
-            intent.putExtra("extra_detail", it)
-            startActivity(intent)
-        }
+
     }
 
     private fun loadSearch(text: String) {
-        searchViewModel.setGameDetailId(text)
-        searchViewModel.searchGames.observe(viewLifecycleOwner, {
-            if (it != null) {
-                when (it) {
-                    is Resource.Loading -> {
-                        statusLayoutVisibility(Status.Loading)
-                    }
-                    is Resource.Success -> {
-                        searchAdapter.setData(it.data!!)
-                        statusLayoutVisibility(Status.Success)
-                    }
-                    is Resource.Error -> {
-                        statusLayoutVisibility(Status.Error)
-                    }
-                }
-            }
-        })
+        if (text.isNotEmpty()) {
+            fragmentSearchBinding.rvHorizontalSearchGame.scrollToPosition(0)
+            getListSearchGame(text)
+        }
     }
 
-    private fun statusLayoutVisibility(status: Status) {
-        fragmentSearchBinding.notificationForSearch.root.visibility = View.GONE
-        fragmentSearchBinding.notificationErrorSearch.root.visibility = View.GONE
-        fragmentSearchBinding.notificationLoadingSearch.visibility = View.GONE
-        fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.GONE
 
-        when (status) {
-            Status.Success -> {
-                fragmentSearchBinding.rvHorizontalSearchGame.visibility = View.VISIBLE
-            }
-            Status.Error -> {
-                fragmentSearchBinding.notificationErrorSearch.root.visibility = View.VISIBLE
-            }
-            Status.Loading -> {
-                fragmentSearchBinding.notificationLoadingSearch.visibility = View.VISIBLE
+    private fun getListSearchGame(query: String) {
+        lifecycleScope.launch {
+            searchViewModel.searchGames(query).collectLatest {
+                searchAdapter.submitData(it)
             }
         }
     }

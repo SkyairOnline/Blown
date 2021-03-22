@@ -1,8 +1,9 @@
 package com.arudo.blown.core.source
 
-import androidx.lifecycle.asFlow
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.arudo.blown.core.domain.model.FavoriteGames
 import com.arudo.blown.core.domain.model.Games
 import com.arudo.blown.core.domain.repository.IBlownRepository
@@ -15,23 +16,29 @@ import com.arudo.blown.core.utils.networkBoundResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+@ExperimentalPagingApi
 class BlownRepository(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : IBlownRepository {
 
-    override fun getGames(): Flow<Resource<List<Games>>> = networkBoundResource(
-        {
-            localDataSource.getGames().map {
-                DataMapper.mapListGamesEntitiesToDomain(it)
-            }
-        },
-        { remoteDataSource.getGames() },
-        {
-            val gamesList = DataMapper.mapListGamesResponseToEntities(it.results)
-            localDataSource.insertGames(gamesList)
+    companion object {
+        private const val pageSize = 20
+    }
+
+    override fun getGames(): Flow<PagingData<Games>> = Pager(
+        config = PagingConfig(
+            pageSize = pageSize,
+            enablePlaceholders = false
+        ),
+        remoteMediator = BlownGamesMediator(localDataSource, remoteDataSource),
+        pagingSourceFactory = {
+            localDataSource.getGames()
         }
-    )
+    ).flow.map {
+        DataMapper.mapListGamesEntitiesToDomain(it)
+    }
+
 
     override fun getDetailGame(gamesId: Int): Flow<Resource<Games>> = networkBoundResource(
         {
@@ -47,25 +54,31 @@ class BlownRepository(
     )
 
 
-    override fun getSearchGames(search: String): Flow<Resource<List<Games>>> = networkBoundResource(
-        {
-            localDataSource.getSearchGames(search).map {
-                DataMapper.mapListGamesEntitiesToDomain(it)
-            }
-        },
-        { remoteDataSource.getSearchGames(search) },
-        {
-            val gamesList = DataMapper.mapListGamesResponseToEntities(it.results)
-            localDataSource.insertGames(gamesList)
+    override fun getSearchGames(search: String): Flow<PagingData<Games>> = Pager(
+        config = PagingConfig(
+            pageSize = pageSize,
+            enablePlaceholders = false
+        ),
+        remoteMediator = BlownGamesMediator(localDataSource, remoteDataSource, search),
+        pagingSourceFactory = {
+            localDataSource.getGames()
         }
-    )
+    ).flow.map {
+        DataMapper.mapListGamesEntitiesToDomain(it)
+    }
 
-    override fun getListGamesFavorites(): Flow<PagedList<Games>> = LivePagedListBuilder(
-        localDataSource.getListGamesFavorites().map { DataMapper.mapGamesEntitiesToDomain(it) },
-        PagedList.Config.Builder().setEnablePlaceholders(false).setInitialLoadSizeHint(20)
-            .setPageSize(20).build()
-    ).build().asFlow()
-
+    override fun getListGamesFavorites(): Flow<PagingData<Games>> = Pager(
+        config = PagingConfig(
+            pageSize = pageSize,
+            enablePlaceholders = false
+        ),
+        remoteMediator = BlownGamesMediator(localDataSource, remoteDataSource),
+        pagingSourceFactory = {
+            localDataSource.getListGamesFavorites()
+        }
+    ).flow.map {
+        DataMapper.mapListGamesEntitiesToDomain(it)
+    }
 
     override fun getGamesFavorite(favoriteGamesId: Int): Flow<FavoriteGames?> =
         localDataSource.getGamesFavorite(favoriteGamesId).map {

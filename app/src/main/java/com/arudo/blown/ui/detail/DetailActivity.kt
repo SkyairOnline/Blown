@@ -70,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
             }
         })
         detailViewModel.favoriteGames(gamesId).observe(this, {
-            buttonFavorite = it != null && it.id == gamesId
+            buttonFavorite = it != null && it.gamesId == gamesId
             contentItemDetail.buttonFavoriteDetail.text = statusButtonText(buttonFavorite)
         })
         contentItemDetail.buttonFavoriteDetail.setOnClickListener {

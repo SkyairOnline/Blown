@@ -20,8 +20,11 @@ data class GamesResponse(
     val name: String,
 
     @field:SerializedName("id")
-    val id: Int,
+    val gamesId: Int,
 
     @field:SerializedName("released")
-    val released: String
+    val released: String,
+
+    @field:SerializedName("added")
+    val added: Int
 )

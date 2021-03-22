@@ -1,19 +1,13 @@
 package com.arudo.blown.ui.main.search
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.arudo.blown.core.domain.usecase.IBlownUseCase
 
-class SearchViewModel(iBlownUseCase: IBlownUseCase) : ViewModel() {
-    private val searchText = MutableLiveData<String>()
+class SearchViewModel(private val iBlownUseCase: IBlownUseCase) : ViewModel() {
 
-    fun setGameDetailId(searchText: String) {
-        this.searchText.value = searchText
-    }
+    fun searchGames(searchText: String) =
+        iBlownUseCase.getSearchGames(searchText).cachedIn(viewModelScope)
 
-    val searchGames = Transformations.switchMap(searchText) {
-        iBlownUseCase.getSearchGames(it).asLiveData()
-    }
 }

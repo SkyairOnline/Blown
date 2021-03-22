@@ -9,5 +9,5 @@ data class FavoriteGamesEntity(
 
     @PrimaryKey
     @NonNull
-    val id: Int
+    val gamesId: Int
 )

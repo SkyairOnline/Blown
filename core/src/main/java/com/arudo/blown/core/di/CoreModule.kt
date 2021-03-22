@@ -1,5 +1,6 @@
 package com.arudo.blown.core.di
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import com.arudo.blown.core.BuildConfig
 import com.arudo.blown.core.domain.repository.IBlownRepository
@@ -71,6 +72,7 @@ val apiModule = module {
     }
 }
 
+@ExperimentalPagingApi
 val repositoryModule = module {
     factory {
         BuildConfig.KEY

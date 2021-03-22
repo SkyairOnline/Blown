@@ -2,21 +2,17 @@ package com.arudo.blown.core.main.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arudo.blown.core.R
 import com.arudo.blown.core.databinding.ItemGameBinding
 import com.arudo.blown.core.domain.model.Games
 import com.arudo.blown.core.utils.backgroundImageContainer
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter : PagingDataAdapter<Games, HomeAdapter.HomeViewHolder>(itemComparator) {
     private val gamesData = ArrayList<Games>()
     var onClickListenerItem: ((Int) -> Unit)? = null
-
-    fun setData(data: List<Games>) {
-        gamesData.clear()
-        gamesData.addAll(data)
-        notifyDataSetChanged()
-    }
 
     inner class HomeViewHolder(val itemGameBinding: ItemGameBinding) :
         RecyclerView.ViewHolder(itemGameBinding.root)
@@ -28,31 +24,41 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         with(holder) {
-            with(gamesData[position]) {
+            getItem(position)?.let { games ->
                 val contextHolder = holder.itemView.context
                 val contentItemGameBinding = itemGameBinding.contentItemGame
                 backgroundImageContainer(
                     contextHolder,
                     null,
-                    backgroundImage,
+                    games.backgroundImage,
                     itemGameBinding.backgroundImage
                 )
-                contentItemGameBinding.txtGameTitle.text = name
-                contentItemGameBinding.txtReleaseDate.text = released
+                contentItemGameBinding.txtGameTitle.text = games.name
+                contentItemGameBinding.txtReleaseDate.text = games.released
                 contentItemGameBinding.txtPlaytime.text = contextHolder.getString(
-                    R.string.playtimeNumber, playtime
+                    R.string.playtimeNumber, games.playtime
                 )
                 contentItemGameBinding.txtSuggested.text =
-                    contextHolder.getString(R.string.suggested_byNumber, suggestionsCount)
+                    contextHolder.getString(R.string.suggested_byNumber, games.suggestionsCount)
                 contentItemGameBinding.txtRating.text =
-                    contextHolder.getString(R.string.ratingNumber, rating)
+                    contextHolder.getString(R.string.ratingNumber, games.rating)
                 holder.itemView.setOnClickListener {
-                    onClickListenerItem?.invoke(id)
+                    onClickListenerItem?.invoke(games.gamesId)
                 }
             }
         }
     }
 
     override fun getItemCount(): Int = gamesData.size
+
+    companion object {
+        private val itemComparator = object : DiffUtil.ItemCallback<Games>() {
+            override fun areItemsTheSame(oldItem: Games, newItem: Games): Boolean =
+                oldItem.gamesId == newItem.gamesId
+
+            override fun areContentsTheSame(oldItem: Games, newItem: Games): Boolean =
+                oldItem == newItem
+        }
+    }
 
 }

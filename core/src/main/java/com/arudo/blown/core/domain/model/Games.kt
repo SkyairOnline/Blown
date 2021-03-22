@@ -12,8 +12,9 @@ data class Games(
     val backgroundImage: String? = null,
     val ratingTop: Int? = null,
     val name: String,
-    val id: Int,
+    val gamesId: Int,
     val released: String? = null,
     val description: String? = null,
-    val website: String? = null
+    val website: String? = null,
+    val added: Int? = null
 ) : Parcelable
