@@ -61,7 +61,7 @@ class BlownRepository(
         ),
         remoteMediator = BlownGamesMediator(localDataSource, remoteDataSource, search),
         pagingSourceFactory = {
-            localDataSource.getGames()
+            localDataSource.getSearchGames(search)
         }
     ).flow.map {
         DataMapper.mapListGamesEntitiesToDomain(it)

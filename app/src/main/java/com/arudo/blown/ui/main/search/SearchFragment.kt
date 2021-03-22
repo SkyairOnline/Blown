@@ -19,6 +19,7 @@ import com.arudo.blown.databinding.FragmentSearchBinding
 import com.arudo.blown.ui.detail.DetailActivity
 import com.arudo.blown.ui.main.GamesLoadStateAdapter
 import com.arudo.blown.ui.main.MainActivity
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -26,19 +27,22 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class SearchFragment : Fragment() {
 
     private val searchViewModel: SearchViewModel by viewModel()
-    private var searchAdapter = SearchAdapter()
+    private var searchAdapter: SearchAdapter? = null
     private var _fragmentSearchBinding: FragmentSearchBinding? = null
     private val fragmentSearchBinding get() = _fragmentSearchBinding!!
+    private var searchJob: Job? = null
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        searchAdapter = SearchAdapter()
+        fragmentSearchBinding.notificationForSearch.root.visibility = View.VISIBLE
         fragmentSearchBinding.rvHorizontalSearchGame.adapter =
-            searchAdapter.withLoadStateHeaderAndFooter(
-                header = GamesLoadStateAdapter { searchAdapter.retry() },
-                footer = GamesLoadStateAdapter { searchAdapter.retry() }
+            searchAdapter?.withLoadStateHeaderAndFooter(
+                header = GamesLoadStateAdapter { searchAdapter?.retry() },
+                footer = GamesLoadStateAdapter { searchAdapter?.retry() }
             )
-        searchAdapter.addLoadStateListener {
+        searchAdapter?.addLoadStateListener {
             fragmentSearchBinding.rvHorizontalSearchGame.isVisible =
                 it.source.refresh is LoadState.NotLoading
             fragmentSearchBinding.notificationLoadingSearch.isVisible =
@@ -46,7 +50,7 @@ class SearchFragment : Fragment() {
             fragmentSearchBinding.notificationErrorSearch.root.isVisible =
                 it.source.refresh is LoadState.Error
         }
-        searchAdapter.onClickListenerItem = {
+        searchAdapter?.onClickListenerItem = {
             val intent = Intent(activity, DetailActivity::class.java)
             intent.putExtra("extra_detail", it)
             startActivity(intent)
@@ -99,15 +103,17 @@ class SearchFragment : Fragment() {
     private fun loadSearch(text: String) {
         if (text.isNotEmpty()) {
             fragmentSearchBinding.rvHorizontalSearchGame.scrollToPosition(0)
+            fragmentSearchBinding.notificationForSearch.root.visibility = View.GONE
             getListSearchGame(text)
         }
     }
 
 
     private fun getListSearchGame(query: String) {
-        lifecycleScope.launch {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
             searchViewModel.searchGames(query).collectLatest {
-                searchAdapter.submitData(it)
+                searchAdapter?.submitData(it)
             }
         }
     }
@@ -123,7 +129,9 @@ class SearchFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        _fragmentSearchBinding = null
         super.onDestroyView()
+        _fragmentSearchBinding = null
+        searchJob?.cancel()
+        searchAdapter = null
     }
 }

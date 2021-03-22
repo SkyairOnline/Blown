@@ -25,17 +25,17 @@ class SearchAdapter : PagingDataAdapter<Games, SearchAdapter.SearchViewHolder>(i
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         with(holder) {
-            with(searchGamesData[position]) {
+            getItem(position)?.let { games ->
                 val contextHolder = holder.itemView.context
                 backgroundImageContainer(
                     contextHolder,
                     null,
-                    backgroundImage,
+                    games.backgroundImage,
                     itemSearchGameBinding.backgroundImage
                 )
-                itemSearchGameBinding.txtTitleSearchGame.text = name
+                itemSearchGameBinding.txtTitleSearchGame.text = games.name
                 holder.itemView.setOnClickListener {
-                    onClickListenerItem?.invoke(gamesId)
+                    onClickListenerItem?.invoke(games.gamesId)
                 }
             }
         }

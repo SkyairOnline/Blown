@@ -71,8 +71,8 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _fragmentHomeBinding = null
         homeJob?.cancel()
         homeAdapter = null
+        _fragmentHomeBinding = null
     }
 }
