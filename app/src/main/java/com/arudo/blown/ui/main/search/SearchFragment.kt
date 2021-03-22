@@ -33,9 +33,11 @@ class SearchFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentSearchBinding.rvHorizontalSearchGame.adapter = searchAdapter.withLoadStateFooter(
-            footer = GamesLoadStateAdapter { searchAdapter.retry() }
-        )
+        fragmentSearchBinding.rvHorizontalSearchGame.adapter =
+            searchAdapter.withLoadStateHeaderAndFooter(
+                header = GamesLoadStateAdapter { searchAdapter.retry() },
+                footer = GamesLoadStateAdapter { searchAdapter.retry() }
+            )
         searchAdapter.addLoadStateListener {
             fragmentSearchBinding.rvHorizontalSearchGame.isVisible =
                 it.source.refresh is LoadState.NotLoading

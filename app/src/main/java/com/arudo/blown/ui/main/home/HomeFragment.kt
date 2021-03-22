@@ -13,6 +13,7 @@ import com.arudo.blown.core.main.home.HomeAdapter
 import com.arudo.blown.databinding.FragmentHomeBinding
 import com.arudo.blown.ui.detail.DetailActivity
 import com.arudo.blown.ui.main.GamesLoadStateAdapter
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,17 +23,19 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private var _fragmentHomeBinding: FragmentHomeBinding? = null
     private val fragmentHomeBinding get() = _fragmentHomeBinding!!
-    private val homeAdapter = HomeAdapter()
+    private var homeAdapter: HomeAdapter? = null
+    private var homeJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentHomeBinding.rvHorizontalGame.adapter = homeAdapter
-        fragmentHomeBinding.rvHorizontalGame.adapter = homeAdapter.withLoadStateHeaderAndFooter(
-            header = GamesLoadStateAdapter { homeAdapter.retry() },
-            footer = GamesLoadStateAdapter { homeAdapter.retry() }
+        homeAdapter = HomeAdapter()
+
+        fragmentHomeBinding.rvHorizontalGame.adapter = homeAdapter?.withLoadStateHeaderAndFooter(
+            header = GamesLoadStateAdapter { homeAdapter?.retry() },
+            footer = GamesLoadStateAdapter { homeAdapter?.retry() }
         )
 
-        homeAdapter.addLoadStateListener {
+        homeAdapter?.addLoadStateListener {
             fragmentHomeBinding.rvHorizontalGame.isVisible =
                 it.source.refresh is LoadState.NotLoading
             fragmentHomeBinding.notificationLoading.isVisible =
@@ -41,7 +44,7 @@ class HomeFragment : Fragment() {
                 it.source.refresh is LoadState.Error
         }
         getListGame()
-        homeAdapter.onClickListenerItem = {
+        homeAdapter?.onClickListenerItem = {
             val intent = Intent(activity, DetailActivity::class.java)
             intent.putExtra("extra_detail", it)
             startActivity(intent)
@@ -49,9 +52,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun getListGame() {
-        lifecycleScope.launch {
+        homeJob?.cancel()
+        homeJob = lifecycleScope.launch {
             homeViewModel.games.collectLatest {
-                homeAdapter.submitData(it)
+                homeAdapter?.submitData(it)
             }
         }
     }
@@ -68,5 +72,7 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _fragmentHomeBinding = null
+        homeJob?.cancel()
+        homeAdapter = null
     }
 }
