@@ -11,7 +11,6 @@ import com.arudo.blown.core.source.remote.RemoteDataSource
 import com.arudo.blown.core.utils.DataMapper
 import retrofit2.HttpException
 import java.io.IOException
-import java.io.InvalidObjectException
 
 @ExperimentalPagingApi
 class BlownGamesMediator(
@@ -29,22 +28,24 @@ class BlownGamesMediator(
                 remoteKeys?.nextKey?.minus(1) ?: 1
             }
             LoadType.PREPEND -> {
-                val remoteKeys = getRemoteKeyForFirstItem(state) ?:
-                // The LoadType is PREPEND so some data was loaded before,
-                // so we should have been able to get remote keys
-                // If the remoteKeys are null, then we're an invalid state and we have a bug
-                throw InvalidObjectException("Remote key and the prevKey should not be null")
-                // If the previous key is null, then we can't request more data
-                remoteKeys.prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
-                remoteKeys.prevKey
+                val remoteKeys = getRemoteKeyForFirstItem(state)
+                // If the previous key is null, then the list is empty so we should wait for data
+                // fetched by remote refresh and can simply skip loading this time by returning
+                // `false` for endOfPaginationReached.
+                val prevKey = remoteKeys?.prevKey ?: return MediatorResult.Success(
+                    endOfPaginationReached = false
+                )
+                prevKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
-                if (remoteKeys?.nextKey == null) {
-                    throw InvalidObjectException("Remote key should not be null for $loadType")
-                    //return MediatorResult.Success(endOfPaginationReached = true)
-                }
-                remoteKeys.nextKey
+                // If the next key is null, then the list is empty so we should wait for data
+                // fetched by remote refresh and can simply skip loading this time by returning
+                // `false` for endOfPaginationReached.
+                val nextKey = remoteKeys?.nextKey ?: return MediatorResult.Success(
+                    endOfPaginationReached = false
+                )
+                nextKey
             }
         }
         try {
@@ -55,10 +56,10 @@ class BlownGamesMediator(
             }
             val remoteResponseItem = remoteResponse.results
             val endPageReach = remoteResponseItem.isEmpty()
-//            if (loadType == LoadType.REFRESH) {
-//                localDataSource.clearRemoteKeys()
-//                localDataSource.deleteAllGames()
-//            }
+            if (loadType == LoadType.REFRESH) {
+                localDataSource.clearRemoteKeys()
+                localDataSource.deleteAllGames()
+            }
             val keys = remoteResponseItem.map {
                 RemotePageKeysEntity(
                     id = it.gamesId,
