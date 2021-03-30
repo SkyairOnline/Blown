@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="notification_switch"
+        android:summary="Turn this option on or off"
+        android:title="@string/notification_settings" />
+    <ListPreference
+        android:defaultValue="English"
+        android:entries="@array/notification_title"
+        android:entryValues="@array/notification_value"
+        android:key="change_notification"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/notification_settings_time" />
+</PreferenceScreen>

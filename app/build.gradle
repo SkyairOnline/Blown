@@ -43,6 +43,9 @@ android {
 
 dependencies {
     implementation project(":core")
+    implementation "androidx.legacy:legacy-support-v4:$legacy_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
+    implementation "androidx.preference:preference-ktx:$preference_version"
+    implementation "com.android.support:support-compat:$androidx_support_version"
 }

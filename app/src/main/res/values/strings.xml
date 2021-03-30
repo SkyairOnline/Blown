@@ -5,6 +5,7 @@
     <string name="title_search">Search Blown</string>
     <string name="title_favorite">Favorite Blown</string>
     <string name="title_activity_detail">Detail Games</string>
+    <string name="title_settings">Setting Blown</string>
     <string name="there_is_an_error_here">There is an error here</string>
     <string name="retryButton">Retry</string>
     <string name="startLoading">Please wait…</string>
@@ -20,4 +21,23 @@
     <string name="website">Website</string>
     <string name="review">Review</string>
     <string name="reviewNumber">%1$d Reviewers</string>
+    <string name="notification_settings">Notification</string>
+    <string name="notification_settings_time">Notification Time</string>
+    <string-array name="notification_title">
+        <item>1 Minute</item>
+        <item>15 Minutes</item>
+        <item>30 Minutes</item>
+        <item>1 Hours</item>
+        <item>8 Hours</item>
+        <item>1 Day</item>
+    </string-array>
+    <string-array name="notification_value">
+        <item>1</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>480</item>
+        <item>1440</item>
+    </string-array>
+    <string name="notification_description">Hi from Blown, some games are being updated, kindly check it!</string>
 </resources>

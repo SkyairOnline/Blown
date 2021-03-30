@@ -2,17 +2,17 @@ package com.arudo.blown.ui.main.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import com.arudo.blown.R
 import com.arudo.blown.core.main.home.HomeAdapter
 import com.arudo.blown.databinding.FragmentHomeBinding
 import com.arudo.blown.ui.detail.DetailActivity
 import com.arudo.blown.ui.main.GamesLoadStateAdapter
+import com.arudo.blown.ui.setting.SettingActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -65,8 +65,22 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         _fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         return fragmentHomeBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_settings, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settingMenu -> startActivity(Intent(context, SettingActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
