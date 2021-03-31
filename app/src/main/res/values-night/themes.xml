@@ -8,6 +8,7 @@
         <item name="android:windowBackground">@color/black</item>
         <item name="android:titleTextStyle">@color/white</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="alertDialogTheme">@style/AlertDialogStyle</item>
     </style>
 
     <style name="bottomNavigationView" parent="Theme.MaterialComponents">+
@@ -21,5 +22,10 @@
     <style name="button" parent="Theme.Blown">
         <item name="android:theme">@drawable/button_background</item>
         <item name="android:backgroundTint">@color/black_500</item>
+    </style>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 </resources>

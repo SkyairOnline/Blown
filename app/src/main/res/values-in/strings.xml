@@ -24,19 +24,17 @@
     <string name="notification_settings">Notifikasi</string>
     <string name="notification_settings_time">Waktu notifikasi</string>
     <string-array name="notification_title">
-        <item>1 Menit</item>
         <item>15 Menit</item>
         <item>30 Menit</item>
         <item>1 Jam</item>
-        <item>8 Jam</item>
+        <item>12 Jam</item>
         <item>1 Hari</item>
     </string-array>
     <string-array name="notification_value">
-        <item>1</item>
         <item>15</item>
         <item>30</item>
         <item>60</item>
-        <item>480</item>
+        <item>720</item>
         <item>1440</item>
     </string-array>
     <string name="notification_description">Halo dari Blown, sejumlah games sedang diupdate, silakan dicek!</string>

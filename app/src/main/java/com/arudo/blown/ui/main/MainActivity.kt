@@ -51,7 +51,9 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val switchOnOrOff = sharedPreferences.getBoolean(SettingActivity.keyPrefNotification, false)
         if (switchOnOrOff) {
-            setInExactRepeating(alarmManager, notifyPendingIntent)
+            val changeValueNotification =
+                sharedPreferences.getString(SettingActivity.changePrefNotification, "15")
+            setInExactRepeating(alarmManager, notifyPendingIntent, changeValueNotification)
         } else {
             notificationManager.cancelAll()
             alarmManager.cancel(notifyPendingIntent)
@@ -59,8 +61,19 @@ class MainActivity : AppCompatActivity() {
         createChannelNotification()
     }
 
-    private fun setInExactRepeating(alarmManager: AlarmManager, pendingIntent: PendingIntent) {
-        val repeatTimeInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES
+    private fun setInExactRepeating(
+        alarmManager: AlarmManager,
+        pendingIntent: PendingIntent,
+        changeValueNotification: String?
+    ) {
+        val repeatTimeInterval: Long = when {
+            (changeValueNotification == "15") -> AlarmManager.INTERVAL_FIFTEEN_MINUTES
+            (changeValueNotification == "30") -> AlarmManager.INTERVAL_HALF_HOUR
+            (changeValueNotification == "60") -> AlarmManager.INTERVAL_HOUR
+            (changeValueNotification == "720") -> AlarmManager.INTERVAL_HALF_DAY
+            (changeValueNotification == "1440") -> AlarmManager.INTERVAL_DAY
+            else -> 0
+        }
         val triggerTime = SystemClock.elapsedRealtime() + repeatTimeInterval
         alarmManager.setInexactRepeating(
             AlarmManager.ELAPSED_REALTIME_WAKEUP,

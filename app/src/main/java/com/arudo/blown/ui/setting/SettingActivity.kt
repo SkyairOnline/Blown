@@ -8,6 +8,7 @@ class SettingActivity : AppCompatActivity() {
 
     companion object {
         const val keyPrefNotification = "notification_switch"
+        const val changePrefNotification = "change_notification"
         const val channelId = 0
         const val channelTextId = "channel_id"
         const val channelName = "channel_name"
