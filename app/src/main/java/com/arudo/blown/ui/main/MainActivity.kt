@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.arudo.blown.R
+import com.arudo.blown.receiver.AlarmReceiver
 import com.arudo.blown.ui.setting.SettingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

@@ -1,4 +1,4 @@
-package com.arudo.blown.ui.main
+package com.arudo.blown.receiver
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.arudo.blown.R
+import com.arudo.blown.ui.main.MainActivity
 import com.arudo.blown.ui.setting.SettingActivity.Companion.channelId
 import com.arudo.blown.ui.setting.SettingActivity.Companion.channelTextId
 
@@ -31,7 +32,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, channelTextId)
             .setSmallIcon(R.drawable.ic_notifications)
             .setContentTitle(context.getString(R.string.notification_settings))
-            .setContentTitle(context.getString(R.string.notification_description))
+            .setContentText(context.getString(R.string.notification_description))
             .setContentIntent(contentPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
